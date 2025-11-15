@@ -92,7 +92,7 @@ public class ServerCapabilities {
 
     public void setNotify(final String raw) {
         notify.clear();
-        parseString(notify, raw);
+        parseStringLowercase(notify, raw);
     }
 
     public void setMaxRedirects(final int maxRedirects) {
@@ -150,6 +150,13 @@ public class ServerCapabilities {
     private static void parseString(final Set<String> target, final String raw) {
         String[] parts = raw.split("\\s+");
         target.addAll(Arrays.asList(parts));
+    }
+
+    private static void parseStringLowercase(final Set<String> target, final String raw) {
+        String[] parts = raw.split("\\s+");
+        for (String part : parts) {
+            target.add(part.toLowerCase());
+        }
     }
 
 }

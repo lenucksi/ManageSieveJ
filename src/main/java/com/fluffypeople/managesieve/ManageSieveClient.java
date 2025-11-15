@@ -701,12 +701,18 @@ public class ManageSieveClient {
                 // Irritatingly, the tokenizer will parse a double here, even
                 // if we only want an int. Sigh.
                 int length = (int) in.nval;
+                if (length < 0) {
+                    throw new ParseException("Literal string length cannot be negative: " + length + " at line " + in.lineno());
+                }
                 token = in.nextToken();
                 if (token != '}') {
                     throw new ParseException("Expecting } got " + tokenToString(token) + " at line " + in.lineno());
                 }
                 token = in.nextToken();
                 if (token != StreamTokenizer.TT_EOL) {
+                    if (token == StreamTokenizer.TT_EOF) {
+                        throw new ParseException("Unexpected end of input after literal string marker (missing CRLF) at line " + in.lineno());
+                    }
                     throw new ParseException("Expecting EOL got " + tokenToString(token) + " at line " + in.lineno());
                 }
                 // Drop out of the tokenizer to read the raw bytes...
