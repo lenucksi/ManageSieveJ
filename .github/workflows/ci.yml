@@ -61,7 +61,7 @@ jobs:
           fail_ci_if_error: false
 
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action/linux@170bf24d20d201b842d7a52403b73ed297e6da6d # v2.18.0
+        uses: EnricoMi/publish-unit-test-result-action@34d7c956a59aed1bfebf31df77b8de55db9bbaaf # v2.21.0
         if: always() && matrix.os == 'ubuntu-latest' && matrix.java == '21'
         with:
           files: |
