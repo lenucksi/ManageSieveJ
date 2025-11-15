@@ -20,7 +20,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        java: ['11', '17', '21']
+        java: ['21']
 
     steps:
       - name: Harden Runner
@@ -61,7 +61,7 @@ jobs:
           fail_ci_if_error: false
 
       - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action@170bf24d20d201b842d7a52403b73ed297e6da6d # v2.18.0
+        uses: EnricoMi/publish-unit-test-result-action/linux@170bf24d20d201b842d7a52403b73ed297e6da6d # v2.18.0
         if: always() && matrix.os == 'ubuntu-latest' && matrix.java == '21'
         with:
           files: |
@@ -107,6 +107,18 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
+
+      - name: Get current date
+        id: get-date
+        run: echo "datetime=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
+
+      - name: Cache OWASP Dependency-Check data
+        uses: actions/cache@5a6de8d1e6290b1ea5c2c7722f349b4da7bcf632 # v4.2.2
+        with:
+          path: ~/.m2/repository/org/owasp/dependency-check-data
+          key: ${{ runner.os }}-owasp-data-${{ steps.get-date.outputs.datetime }}
+          restore-keys: |
+            ${{ runner.os }}-owasp-data-
 
       - name: Run OWASP Dependency Check
         run: |
