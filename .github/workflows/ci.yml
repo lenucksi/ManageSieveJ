@@ -109,15 +109,17 @@ jobs:
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Get current date
+      - name: Get current week
         id: get-date
-        run: echo "datetime=$(/bin/date -u "+%Y%m%d")" >> $GITHUB_OUTPUT
+        run: echo "week=$(/bin/date -u "+%Y-W%V")" >> $GITHUB_OUTPUT
 
       - name: Cache OWASP Dependency-Check data
         uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         with:
-          path: ~/.m2/repository/org/owasp/dependency-check-data
-          key: ${{ runner.os }}-owasp-data-${{ steps.get-date.outputs.datetime }}
+          path: |
+            ~/.m2/repository/org/owasp/dependency-check-data
+            ~/.m2/repository/org/owasp/dependency-check-utils
+          key: ${{ runner.os }}-owasp-data-${{ steps.get-date.outputs.week }}
           restore-keys: |
             ${{ runner.os }}-owasp-data-
 
@@ -126,7 +128,10 @@ jobs:
           mvn -B org.owasp:dependency-check-maven:10.0.4:check \
             -DfailBuildOnCVSS=7 \
             -DsuppressionFile=.github/dependency-check-suppressions.xml \
+            -DnvdApiKey=${{ secrets.NVD_TOKEN }} \
             || true
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_TOKEN }}
 
       - name: Upload OWASP report
         if: always()
