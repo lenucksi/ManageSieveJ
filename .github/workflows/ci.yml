@@ -56,7 +56,7 @@ jobs:
         if: matrix.os == 'ubuntu-latest' && matrix.java == '21'
         uses: codecov/codecov-action@5a1091511ad55cbe89839c7260b706298ca349f7 # v5.5.1
         with:
-          file: ./target/site/jacoco/jacoco.xml
+          files: ./target/site/jacoco/jacoco.xml
           flags: unittests
           fail_ci_if_error: false
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -66,7 +66,7 @@ jobs:
         if: always() && matrix.os == 'ubuntu-latest' && matrix.java == '21'
         with:
           files: |
-            target/surefire-reports/*.xml
+            target/surefire-reports/TEST-*.xml
 
       - name: Upload test results
         if: always()
