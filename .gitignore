@@ -131,3 +131,6 @@ buildNumber.properties
 
 # End of https://www.gitignore.io/api/java,maven,IntelliJ
 .idea
+
+# Developer documentation (not for public distribution)
+dev-docs/
