@@ -2,7 +2,7 @@ package com.fluffypeople.managesieve;
 
 import org.testng.annotations.Test;
 
-import static org.assertj.core.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.*;
 
 /**
