@@ -1,5 +1,6 @@
-
 # Introduction
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ?ref=badge_shield)
+
 
 [Sieve][1] is a simple mail filtering language. Users scripts are stored and run on
 the mail server, and are managed through the [Manage Sieve][2] protocol. This library
@@ -26,6 +27,9 @@ com.fluffypeople.managesieve.examples package.
 # Licence
 
 This library is covered by the MIT licence. 
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ?ref=badge_large)
 
 # References
 
