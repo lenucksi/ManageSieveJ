@@ -6,7 +6,7 @@ ManageSieveJ is a Java implementation of the ManageSieve protocol (RFC 5804) for
 
 ## Key Information
 
-- **Language**: Java 11+
+- **Language**: Java 21 LTS (builds with Java 17 and 11 for compatibility testing)
 - **Build System**: Maven
 - **Testing Framework**: TestNG
 - **License**: MIT
