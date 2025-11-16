@@ -811,6 +811,13 @@ public class ManageSieveClient {
 
     private void setupAfterConnect(Socket sock) throws IOException {
         sock.setSoTimeout(socketTimeout);
+        // Enable hostname verification for SSL sockets
+        if (sock instanceof SSLSocket) {
+            SSLSocket sslSocket = (SSLSocket) sock;
+            javax.net.ssl.SSLParameters sslParams = sslSocket.getSSLParameters();
+            sslParams.setEndpointIdentificationAlgorithm("HTTPS");
+            sslSocket.setSSLParameters(sslParams);
+        }
         final BufferedInputStream byteStream = new BufferedInputStream(sock.getInputStream());
         in = new StreamTokenizer(new InputStreamReader(byteStream, UTF8));
         setupTokenizer();
