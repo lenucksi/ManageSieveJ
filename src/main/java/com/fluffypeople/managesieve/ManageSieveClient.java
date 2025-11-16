@@ -811,10 +811,23 @@ public class ManageSieveClient {
 
     private void setupAfterConnect(Socket sock) throws IOException {
         sock.setSoTimeout(socketTimeout);
-        final BufferedInputStream byteStream = new BufferedInputStream(sock.getInputStream());
-        in = new StreamTokenizer(new InputStreamReader(byteStream, UTF8));
-        setupTokenizer();
-        out = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), UTF8));
+        BufferedInputStream byteStream = null;
+        InputStreamReader reader = null;
+        try {
+            byteStream = new BufferedInputStream(sock.getInputStream());
+            reader = new InputStreamReader(byteStream, UTF8);
+            in = new StreamTokenizer(reader);
+            setupTokenizer();
+            out = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), UTF8));
+        } catch (IOException | RuntimeException ex) {
+            // Clean up partially-constructed input streams if there was a failure
+            if (reader != null) {
+                try { reader.close(); } catch (IOException ignored) {}
+            } else if (byteStream != null) {
+                try { byteStream.close(); } catch (IOException ignored) {}
+            }
+            throw ex;
+        }
     }
 
     void setupForTesting(Reader from, Writer to) {
