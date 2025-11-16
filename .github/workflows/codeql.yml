@@ -13,11 +13,23 @@ permissions:
   actions: read
   contents: read
   security-events: write
+  packages: read
 
 jobs:
   analyze:
-    name: Analyze Code
+    name: Analyze (${{ matrix.language }})
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - language: java-kotlin
+            build-mode: manual
+            queries: security-extended,security-and-quality
+          - language: actions
+            build-mode: none
+            queries: security-and-quality
 
     steps:
       - name: Harden Runner
@@ -33,20 +45,23 @@ jobs:
       - name: Initialize CodeQL
         uses: github/codeql-action/init@0499de31b99561a6d14a36a5f662c2a54f91beee # v4.31.2
         with:
-          languages: java
-          queries: security-extended,security-and-quality
+          languages: ${{ matrix.language }}
+          build-mode: ${{ matrix.build-mode }}
+          queries: ${{ matrix.queries }}
 
       - name: Set up JDK 21
+        if: matrix.language == 'java-kotlin'
         uses: actions/setup-java@8df1039502a15bceb9433410b1a100fbe190c53b # v4.5.0
         with:
           java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
 
-      - name: Build
+      - name: Build Java project
+        if: matrix.language == 'java-kotlin'
         run: mvn -B clean package -DskipTests
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@0499de31b99561a6d14a36a5f662c2a54f91beee # v4.31.2
         with:
-          category: "/language:java"
+          category: "/language:${{ matrix.language }}"
