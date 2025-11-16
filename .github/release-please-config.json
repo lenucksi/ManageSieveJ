@@ -11,7 +11,7 @@
         {
           "type": "xml",
           "path": "pom.xml",
-          "xmlpath": "/project/version"
+          "xpath": "/project/version"
         }
       ]
     }
