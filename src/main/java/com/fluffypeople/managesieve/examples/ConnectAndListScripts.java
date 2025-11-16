@@ -39,6 +39,13 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+// Additional imports required for secure SSL factory
+import java.io.File;
+import java.io.FileInputStream;
+import java.security.KeyStore;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
+import javax.net.ssl.TrustManagerFactory;
 /**
  * An example of how to use this package to connect and list scripts held on a
  * server.
@@ -148,34 +155,31 @@ public class ConnectAndListScripts {
     }
 
     /**
-     * Create a SSLSocketFactory that ignores Certificate Validation. You are
-     * strongly advised not to use this in production code. (Partly because the
-     *
-     * @return a non-validating SSLSocketFactory
+     * Create an SSLSocketFactory that trusts a specific certificate (self-signed or CA-signed).
+     * This method loads a certificate from a specified file path and uses a TrustManagerFactory
+     * with a KeyStore containing just that certificate.
+     * 
+     * @param certificateFilePath Path to the trusted certificate file (in X.509 DER or PEM format)
+     * @return an SSLSocketFactory trusting ONLY the supplied certificate, or null on error
      */
-    public static SSLSocketFactory getInsecureSSLFactory() {
+    public static SSLSocketFactory getCustomSSLFactory(String certificateFilePath) {
         try {
-            // Create a trust manager that does not validate certificate chains
-            TrustManager[] trustAllCerts = new TrustManager[]{
-                new X509TrustManager() {
-                    @Override
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return new X509Certificate[0];
-                    }
-
-                    @Override
-                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                    }
-
-                    @Override
-                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                    }
-                }};
-
-            SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, trustAllCerts, new SecureRandom());
+            // Load the certificate
+            java.io.File certificateFile = new java.io.File(certificateFilePath);
+            java.security.KeyStore keyStore = java.security.KeyStore.getInstance(java.security.KeyStore.getDefaultType());
+            keyStore.load(null, null); // Initialize empty keystore
+            java.security.cert.CertificateFactory cf = java.security.cert.CertificateFactory.getInstance("X.509");
+            java.security.cert.X509Certificate cert;
+            try (java.io.FileInputStream fis = new java.io.FileInputStream(certificateFile)) {
+                cert = (java.security.cert.X509Certificate) cf.generateCertificate(fis);
+            }
+            keyStore.setCertificateEntry("custom", cert);
+            javax.net.ssl.TrustManagerFactory tmf = javax.net.ssl.TrustManagerFactory.getInstance(javax.net.ssl.TrustManagerFactory.getDefaultAlgorithm());
+            tmf.init(keyStore);
+            javax.net.ssl.SSLContext sc = javax.net.ssl.SSLContext.getInstance("TLS");
+            sc.init(null, tmf.getTrustManagers(), new SecureRandom());
             return sc.getSocketFactory();
-        } catch (NoSuchAlgorithmException | KeyManagementException ex) {
+        } catch (Exception ex) {
             return null;
         }
     }
