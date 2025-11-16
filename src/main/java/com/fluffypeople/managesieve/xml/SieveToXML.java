@@ -246,7 +246,7 @@ public class SieveToXML {
         log.log(Level.FINEST, "number");
         int token = in.nextToken();
         if (token == StreamTokenizer.TT_NUMBER) {
-            Long raw = (long) in.nval;
+            long raw = (long) in.nval;
 
             token = in.nextToken();
             if (token == StreamTokenizer.TT_WORD) {
