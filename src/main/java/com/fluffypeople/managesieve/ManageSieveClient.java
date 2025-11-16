@@ -799,7 +799,12 @@ public class ManageSieveClient {
     }
 
     private void sendLine(final String line) throws IOException {
-        log.log(Level.FINEST, "Sending line: " + line);
+        // Avoid logging potentially sensitive information, e.g., SASL responses (formatted as {length+}<CRLF>data)
+        if (line.matches("^\\{\\d+\\+\\}\\r?\\n.*")) {
+            log.log(Level.FINEST, "Sending line: <redacted sensitive authentication response>");
+        } else {
+            log.log(Level.FINEST, "Sending line: " + line);
+        }
         out.print(line);
         out.print(CRLF);
         out.flush();
