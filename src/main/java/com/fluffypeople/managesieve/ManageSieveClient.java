@@ -522,6 +522,76 @@ public class ManageSieveClient {
         return parseResponse();
     }
 
+    /**
+     * Disconnect from the server and properly clean up all resources.
+     * This method ensures that the input reader, output writer, and socket
+     * are all properly closed to prevent resource leaks (CWE-404).
+     * <p>
+     * This method should be called after logout() to ensure a clean disconnect.
+     * It is safe to call this method multiple times or on an already-closed connection.
+     * </p>
+     *
+     * @throws IOException if an I/O error occurs during resource cleanup.
+     *                     If multiple close operations fail, only the first exception is thrown.
+     */
+    public synchronized void disconnect() throws IOException {
+        IOException firstException = null;
+
+        // Close reader (input stream chain)
+        if (in != null) {
+            try {
+                // StreamTokenizer doesn't have a close method, but we need to close
+                // the underlying Reader. We can't access it directly, so we'll close
+                // the socket which will close all streams.
+                log.log(Level.FINEST, "Closing input stream");
+            } catch (Exception e) {
+                log.log(Level.WARNING, "Error preparing to close input stream", e);
+                if (firstException == null && e instanceof IOException) {
+                    firstException = (IOException) e;
+                }
+            } finally {
+                in = null;
+            }
+        }
+
+        // Close writer (output stream chain)
+        if (out != null) {
+            try {
+                log.log(Level.FINEST, "Closing output stream");
+                out.close();
+            } catch (Exception e) {
+                log.log(Level.WARNING, "Error closing output stream", e);
+                if (firstException == null && e instanceof IOException) {
+                    firstException = (IOException) e;
+                }
+            } finally {
+                out = null;
+            }
+        }
+
+        // Close socket
+        if (socket != null) {
+            try {
+                if (!socket.isClosed()) {
+                    log.log(Level.FINEST, "Closing socket");
+                    socket.close();
+                }
+            } catch (IOException e) {
+                log.log(Level.WARNING, "Error closing socket", e);
+                if (firstException == null) {
+                    firstException = e;
+                }
+            } finally {
+                socket = null;
+            }
+        }
+
+        // Re-throw the first exception if any occurred
+        if (firstException != null) {
+            throw firstException;
+        }
+    }
+
     public synchronized ManageSieveResponse renamescript(final String oldName, final String newName) throws IOException, ParseException {
         String encodedOldName = encodeString(oldName);
         String encodedNewName = encodeString(newName);
@@ -799,7 +869,14 @@ public class ManageSieveClient {
     }
 
     private void sendLine(final String line) throws IOException {
-        log.log(Level.FINEST, "Sending line: " + line);
+        // Redact SASL authentication data from logs (CWE-532)
+        // Pattern matches SASL authentication literals: {digits}CRLF or {digits+}CRLF
+        // Examples: {16}\r\nplaintext-auth, {8+}\r\ncontinued
+        if (line.matches("^\\{\\d+\\+?\\}(\\r?\\n.*)?")) {
+            log.log(Level.FINEST, "Sending line: <redacted SASL authentication data>");
+        } else {
+            log.log(Level.FINEST, "Sending line: {0}", line);
+        }
         out.print(line);
         out.print(CRLF);
         out.flush();
