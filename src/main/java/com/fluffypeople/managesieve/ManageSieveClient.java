@@ -522,6 +522,76 @@ public class ManageSieveClient {
         return parseResponse();
     }
 
+    /**
+     * Disconnect from the server and properly clean up all resources.
+     * This method ensures that the input reader, output writer, and socket
+     * are all properly closed to prevent resource leaks (CWE-404).
+     * <p>
+     * This method should be called after logout() to ensure a clean disconnect.
+     * It is safe to call this method multiple times or on an already-closed connection.
+     * </p>
+     *
+     * @throws IOException if an I/O error occurs during resource cleanup.
+     *                     If multiple close operations fail, only the first exception is thrown.
+     */
+    public synchronized void disconnect() throws IOException {
+        IOException firstException = null;
+
+        // Close reader (input stream chain)
+        if (in != null) {
+            try {
+                // StreamTokenizer doesn't have a close method, but we need to close
+                // the underlying Reader. We can't access it directly, so we'll close
+                // the socket which will close all streams.
+                log.log(Level.FINEST, "Closing input stream");
+            } catch (Exception e) {
+                log.log(Level.WARNING, "Error preparing to close input stream", e);
+                if (firstException == null && e instanceof IOException) {
+                    firstException = (IOException) e;
+                }
+            } finally {
+                in = null;
+            }
+        }
+
+        // Close writer (output stream chain)
+        if (out != null) {
+            try {
+                log.log(Level.FINEST, "Closing output stream");
+                out.close();
+            } catch (Exception e) {
+                log.log(Level.WARNING, "Error closing output stream", e);
+                if (firstException == null && e instanceof IOException) {
+                    firstException = (IOException) e;
+                }
+            } finally {
+                out = null;
+            }
+        }
+
+        // Close socket
+        if (socket != null) {
+            try {
+                if (!socket.isClosed()) {
+                    log.log(Level.FINEST, "Closing socket");
+                    socket.close();
+                }
+            } catch (IOException e) {
+                log.log(Level.WARNING, "Error closing socket", e);
+                if (firstException == null) {
+                    firstException = e;
+                }
+            } finally {
+                socket = null;
+            }
+        }
+
+        // Re-throw the first exception if any occurred
+        if (firstException != null) {
+            throw firstException;
+        }
+    }
+
     public synchronized ManageSieveResponse renamescript(final String oldName, final String newName) throws IOException, ParseException {
         String encodedOldName = encodeString(oldName);
         String encodedNewName = encodeString(newName);
@@ -799,7 +869,28 @@ public class ManageSieveClient {
     }
 
     private void sendLine(final String line) throws IOException {
-        log.log(Level.FINEST, "Sending line: " + line);
+        // Redact sensitive authentication data from logs (CWE-532)
+        // To prevent any taint tracking issues, we NEVER log the actual line content.
+        // Instead, we log only metadata about what type of line is being sent.
+
+        // Check for SASL authentication literals: {digits}CRLF or {digits+}CRLF
+        if (line.matches("^\\{\\d+\\+?\\}(\\r?\\n.*)?")) {
+            log.log(Level.FINEST, "Sending line: <redacted SASL authentication literal>");
+        }
+        // Check for AUTHENTICATE command and responses
+        else if (line.toUpperCase().contains("AUTHENTICATE")) {
+            log.log(Level.FINEST, "Sending line: <redacted AUTHENTICATE command>");
+        }
+        // Check for other potential credential keywords
+        else if (line.toLowerCase().matches(".*\\b(password|secret|credential|token|key)\\b.*")) {
+            log.log(Level.FINEST, "Sending line: <redacted sensitive data>");
+        }
+        // For all other lines, log only the first word (command name) without parameters
+        else {
+            String commandName = line.split("\\s+", 2)[0];
+            log.log(Level.FINEST, "Sending command: {0}", commandName);
+        }
+
         out.print(line);
         out.print(CRLF);
         out.flush();
