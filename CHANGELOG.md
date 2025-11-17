@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.5](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.4...managesievej-v0.3.5) (2025-11-17)
+
+
+### Bug Fixes
+
+* **ci:** add attestations permission to release workflow ([3a26141](https://github.com/lenucksi/ManageSieveJ/commit/3a261418dd4277b8c713b30649b6433651cdde19))
+
 ## [0.3.4](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.3...managesievej-v0.3.4) (2025-11-17)
 
 
