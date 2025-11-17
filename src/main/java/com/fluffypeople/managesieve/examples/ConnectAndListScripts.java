@@ -28,16 +28,8 @@ import com.fluffypeople.managesieve.ManageSieveResponse;
 import com.fluffypeople.managesieve.ParseException;
 import com.fluffypeople.managesieve.SieveScript;
 import java.io.IOException;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.X509TrustManager;
 
 /**
  * An example of how to use this package to connect and list scripts held on a
@@ -67,15 +59,13 @@ public class ConnectAndListScripts {
                 throw new IOException("Can't connect to server: " + resp.getMessage());
             }
 
-            // Start SSL connection. This will probably fail with a self-signed
-            // certificate, unless the server name in the certificate matches
-            // SERVER_NAME. Either setup a new certificate, or use the two
-            // argument version of starttls which allows you to ignore the
-            // hostname check.
-            // resp = client.starttls();
-
-
-            resp = client.starttls(getInsecureSSLFactory(), false);
+            // Start SSL connection with proper certificate validation.
+            // For self-signed certificates, configure your Java keystore instead of
+            // bypassing validation. See: https://docs.oracle.com/javase/tutorial/security/toolsign/rstep2.html
+            //
+            // WARNING: Never use insecure trust managers in production!
+            // The old getInsecureSSLFactory() method has been removed for security reasons.
+            resp = client.starttls();
             if (!resp.isOk()) {
                 throw new IOException("Can't start SSL:" + resp.getMessage());
             }
@@ -147,36 +137,23 @@ public class ConnectAndListScripts {
         }
     }
 
-    /**
-     * Create a SSLSocketFactory that ignores Certificate Validation. You are
-     * strongly advised not to use this in production code. (Partly because the
+    /*
+     * SECURITY NOTE:
      *
-     * @return a non-validating SSLSocketFactory
+     * The getInsecureSSLFactory() method has been removed because it bypassed
+     * certificate validation, creating a critical security vulnerability (CWE-295).
+     *
+     * For testing with self-signed certificates, use proper certificate management:
+     *
+     * 1. Import the certificate into Java's keystore:
+     *    keytool -import -alias myserver -file server.crt -keystore $JAVA_HOME/lib/security/cacerts
+     *
+     * 2. Or create a custom truststore for your application:
+     *    keytool -import -alias myserver -file server.crt -keystore mytruststore.jks
+     *
+     * 3. For production applications (like SieveEditor), implement interactive
+     *    certificate trust dialogs at the application level.
+     *
+     * See: https://docs.oracle.com/javase/tutorial/security/toolsign/rstep2.html
      */
-    public static SSLSocketFactory getInsecureSSLFactory() {
-        try {
-            // Create a trust manager that does not validate certificate chains
-            TrustManager[] trustAllCerts = new TrustManager[]{
-                new X509TrustManager() {
-                    @Override
-                    public X509Certificate[] getAcceptedIssuers() {
-                        return new X509Certificate[0];
-                    }
-
-                    @Override
-                    public void checkClientTrusted(X509Certificate[] certs, String authType) {
-                    }
-
-                    @Override
-                    public void checkServerTrusted(X509Certificate[] certs, String authType) {
-                    }
-                }};
-
-            SSLContext sc = SSLContext.getInstance("SSL");
-            sc.init(null, trustAllCerts, new SecureRandom());
-            return sc.getSocketFactory();
-        } catch (NoSuchAlgorithmException | KeyManagementException ex) {
-            return null;
-        }
-    }
 }
