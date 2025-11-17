@@ -1,5 +1,25 @@
 # Changelog
 
+## [0.3.4](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.3...managesievej-v0.3.4) (2025-11-17)
+
+
+### Features
+
+* add OpenSSF Scorecard security assessment workflow ([03d2e65](https://github.com/lenucksi/ManageSieveJ/commit/03d2e65f545841f387da13221257a8544b39033a))
+* enable SLSA build provenance attestation in CI workflow ([2e1e1de](https://github.com/lenucksi/ManageSieveJ/commit/2e1e1de4b16bcee7abad1e3eff33b25c4e61c20c))
+
+
+### Bug Fixes
+
+* **security:** apply critical security fixes for log sanitization and resource leaks ([677e07b](https://github.com/lenucksi/ManageSieveJ/commit/677e07bf5b0845775df2b37a0ac86fb5228bc61f))
+* **security:** eliminate taint flow by never logging line content ([12ee5d0](https://github.com/lenucksi/ManageSieveJ/commit/12ee5d033755cd9d774db4071556e85fb70091bb))
+* **security:** strengthen log redaction to address CodeQL alert ([9002cc7](https://github.com/lenucksi/ManageSieveJ/commit/9002cc7f830fff68f2b8ddb4a2c718db8f3f8b0f))
+
+
+### Code Refactoring
+
+* unify CodeQL workflows into single enhanced workflow ([f5ac1be](https://github.com/lenucksi/ManageSieveJ/commit/f5ac1be126a4e479e4e3e9d756d3900af4b0abf2))
+
 ## [0.3.3](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.2...managesievej-v0.3.3) (2025-11-16)
 
 
