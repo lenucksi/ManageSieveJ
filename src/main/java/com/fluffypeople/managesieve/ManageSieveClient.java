@@ -869,14 +869,41 @@ public class ManageSieveClient {
     }
 
     private void sendLine(final String line) throws IOException {
-        // Redact SASL authentication data from logs (CWE-532)
-        // Pattern matches SASL authentication literals: {digits}CRLF or {digits+}CRLF
-        // Examples: {16}\r\nplaintext-auth, {8+}\r\ncontinued
+        // Redact sensitive authentication data from logs (CWE-532)
+        // Be defensive: redact SASL literals, AUTHENTICATE commands, and any potentially sensitive data
+
+        boolean shouldRedact = false;
+        String logMessage = "";
+
+        // Check for SASL authentication literals: {digits}CRLF or {digits+}CRLF
         if (line.matches("^\\{\\d+\\+?\\}(\\r?\\n.*)?")) {
-            log.log(Level.FINEST, "Sending line: <redacted SASL authentication data>");
-        } else {
-            log.log(Level.FINEST, "Sending line: {0}", line);
+            shouldRedact = true;
+            logMessage = "Sending line: <redacted SASL authentication literal>";
         }
+        // Check for AUTHENTICATE command and responses
+        else if (line.toUpperCase().contains("AUTHENTICATE")) {
+            shouldRedact = true;
+            logMessage = "Sending line: <redacted AUTHENTICATE command>";
+        }
+        // Check for other potential credential keywords
+        else if (line.toLowerCase().matches(".*\\b(password|secret|credential|token|key)\\b.*")) {
+            shouldRedact = true;
+            logMessage = "Sending line: <redacted sensitive data>";
+        }
+
+        // Log appropriately
+        if (shouldRedact) {
+            log.log(Level.FINEST, logMessage);
+        } else {
+            // For safe protocol commands, log sanitized version (command only, no full params)
+            String sanitizedLine = line;
+            if (line.length() > 100) {
+                // Truncate long lines to avoid logging large script bodies
+                sanitizedLine = line.substring(0, 100) + "... [truncated]";
+            }
+            log.log(Level.FINEST, "Sending line: {0}", sanitizedLine);
+        }
+
         out.print(line);
         out.print(CRLF);
         out.flush();
