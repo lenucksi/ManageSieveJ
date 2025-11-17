@@ -129,6 +129,13 @@
             <version>3.27.6</version>
             <scope>test</scope>
         </dependency>
+        <!-- SLF4J implementation for TestNG logging during tests -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>2.0.16</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <repositories>
