@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.6](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.5...managesievej-v0.3.6) (2025-11-17)
+
+
+### Bug Fixes
+
+* **security:** remove insecure TrustManager from example code ([7528133](https://github.com/lenucksi/ManageSieveJ/commit/75281332a5e40c5e06d305deecda7d6484ea405e))
+
 ## [0.3.5](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.4...managesievej-v0.3.5) (2025-11-17)
 
 
