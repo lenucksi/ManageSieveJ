@@ -870,38 +870,25 @@ public class ManageSieveClient {
 
     private void sendLine(final String line) throws IOException {
         // Redact sensitive authentication data from logs (CWE-532)
-        // Be defensive: redact SASL literals, AUTHENTICATE commands, and any potentially sensitive data
-
-        boolean shouldRedact = false;
-        String logMessage = "";
+        // To prevent any taint tracking issues, we NEVER log the actual line content.
+        // Instead, we log only metadata about what type of line is being sent.
 
         // Check for SASL authentication literals: {digits}CRLF or {digits+}CRLF
         if (line.matches("^\\{\\d+\\+?\\}(\\r?\\n.*)?")) {
-            shouldRedact = true;
-            logMessage = "Sending line: <redacted SASL authentication literal>";
+            log.log(Level.FINEST, "Sending line: <redacted SASL authentication literal>");
         }
         // Check for AUTHENTICATE command and responses
         else if (line.toUpperCase().contains("AUTHENTICATE")) {
-            shouldRedact = true;
-            logMessage = "Sending line: <redacted AUTHENTICATE command>";
+            log.log(Level.FINEST, "Sending line: <redacted AUTHENTICATE command>");
         }
         // Check for other potential credential keywords
         else if (line.toLowerCase().matches(".*\\b(password|secret|credential|token|key)\\b.*")) {
-            shouldRedact = true;
-            logMessage = "Sending line: <redacted sensitive data>";
+            log.log(Level.FINEST, "Sending line: <redacted sensitive data>");
         }
-
-        // Log appropriately
-        if (shouldRedact) {
-            log.log(Level.FINEST, logMessage);
-        } else {
-            // For safe protocol commands, log sanitized version (command only, no full params)
-            String sanitizedLine = line;
-            if (line.length() > 100) {
-                // Truncate long lines to avoid logging large script bodies
-                sanitizedLine = line.substring(0, 100) + "... [truncated]";
-            }
-            log.log(Level.FINEST, "Sending line: {0}", sanitizedLine);
+        // For all other lines, log only the first word (command name) without parameters
+        else {
+            String commandName = line.split("\\s+", 2)[0];
+            log.log(Level.FINEST, "Sending command: {0}", commandName);
         }
 
         out.print(line);
