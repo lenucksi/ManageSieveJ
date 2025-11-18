@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.3.7](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.6...managesievej-v0.3.7) (2025-11-18)
+
+
+### Bug Fixes
+
+* **java:** Handle TLS connections correctly by name ([2dc9b07](https://github.com/lenucksi/ManageSieveJ/commit/2dc9b0710b198f5e4ad0c0f142a81d85bf69d754))
+* **merge:** Merge remote-tracking branch 'refs/remotes/origin/master' ([3da682c](https://github.com/lenucksi/ManageSieveJ/commit/3da682c25362628e1c01f3c3efe31be9a506fbee))
+
+
+### Build System
+
+* **deps:** add slf4j-simple to eliminate test warnings ([1dab4c2](https://github.com/lenucksi/ManageSieveJ/commit/1dab4c2a115a5c78fd2d269592efe10895d974fd))
+
 ## [0.3.6](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.5...managesievej-v0.3.6) (2025-11-17)
 
 
