@@ -192,7 +192,7 @@ public class ManageSieveClient {
         sendCommand("STARTTLS");
         ManageSieveResponse resp = parseResponse();
         if (resp.isOk()) {
-            final SSLSocket secureSocket = (SSLSocket) sslSocketFactory.createSocket(socket, socket.getInetAddress().getHostAddress(), socket.getPort(), true);
+            final SSLSocket secureSocket = (SSLSocket) sslSocketFactory.createSocket(socket, hostname, socket.getPort(), true);
             if (rfcCheck) {
                 // The manage sieve rfc says we should check that the name in the certificate
                 // matches the hostname that we want. RFC: http://www.ietf.org/rfc/rfc5804.txt
