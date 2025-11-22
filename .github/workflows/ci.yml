@@ -83,6 +83,18 @@ jobs:
           name: coverage-report
           path: target/site/jacoco/
           retention-days: 30
+  
+  sonarqube:
+    name: SonarQube
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0  
+      - name: SonarQubeScan
+        uses: SonarSource/sonarqube-scan-action@v6
+        env: 
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build:
     name: Build Package
@@ -144,4 +156,5 @@ jobs:
             exit 1
           fi
           echo "All checks passed!"
+
 
