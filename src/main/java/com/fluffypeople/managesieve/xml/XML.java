@@ -348,7 +348,7 @@ public class XML {
      * @param object Object contents of the element
      * @return this XML document
      */
-    public XML add(String tag, Object object) {
+    public XML addObject(String tag, Object object) {
         if (object != null) {
             return add(tag, object.toString());
         } else {
