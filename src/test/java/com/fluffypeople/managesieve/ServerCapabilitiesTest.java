@@ -1,10 +1,10 @@
 package com.fluffypeople.managesieve;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Tests for ServerCapabilities class.
@@ -14,7 +14,7 @@ public class ServerCapabilitiesTest {
 
     private ServerCapabilities capabilities;
 
-    @BeforeMethod
+    @BeforeEach
     public void setUp() {
         capabilities = new ServerCapabilities();
     }

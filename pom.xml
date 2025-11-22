@@ -111,10 +111,11 @@
     </properties>
 
     <dependencies>
+        <!-- JUnit 5 - Primary test framework -->
         <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>7.11.0</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.11.4</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -129,12 +130,38 @@
             <version>3.27.6</version>
             <scope>test</scope>
         </dependency>
-        <!-- SLF4J implementation for TestNG logging during tests -->
+        <!-- SLF4J implementation for logging during tests -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>2.0.16</version>
             <scope>test</scope>
+        </dependency>
+        <!-- Jazzer for fuzz testing -->
+        <dependency>
+            <groupId>com.code-intelligence</groupId>
+            <artifactId>jazzer-junit</artifactId>
+            <version>0.26.0</version>
+            <scope>test</scope>
+            <exclusions>
+                <!-- Exclude older JUnit platform versions that conflict with JUnit 5.11 -->
+                <exclusion>
+                    <groupId>org.junit.platform</groupId>
+                    <artifactId>junit-platform-commons</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.junit.platform</groupId>
+                    <artifactId>junit-platform-launcher</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.junit.jupiter</groupId>
+                    <artifactId>junit-jupiter-params</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 

@@ -1,17 +1,19 @@
 package com.fluffypeople.managesieve;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.DataProvider;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.testng.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Tests for ManageSieveClient string encoding and parsing.
@@ -21,28 +23,28 @@ public class ManageSieveClientStringEncodingTest {
 
     private ManageSieveClient client;
 
-    @BeforeMethod
+    @BeforeEach
     public void setUp() {
         client = new ManageSieveClient();
     }
 
-    @DataProvider(name = "literalStrings")
-    public Object[][] createLiteralStrings() {
-        return new Object[][]{
-                {"Hello World"},
-                {""},  // Empty string
-                {"Line1\r\nLine2"},  // Multi-line
-                {"With\ttabs\tand\nnewlines"},
-                {"Special chars: !@#$%^&*()"},
-                {"Quotes: \"test\" and 'test'"},
-                {"Backslashes: \\ \\\\ \\\\\\"},
-                {"{10}\r\nNested"},  // Nested literal string format
-                {"Unicode: ÄÖÜäöü"},
-                {"Mixed:\r\n\t\"\\{"}
-        };
+    static Stream<String> literalStrings() {
+        return Stream.of(
+                "Hello World",
+                "",  // Empty string
+                "Line1\r\nLine2",  // Multi-line
+                "With\ttabs\tand\nnewlines",
+                "Special chars: !@#$%^&*()",
+                "Quotes: \"test\" and 'test'",
+                "Backslashes: \\ \\\\ \\\\\\",
+                "{10}\r\nNested",  // Nested literal string format
+                "Unicode: ÄÖÜäöü",
+                "Mixed:\r\n\t\"\\{"
+        );
     }
 
-    @Test(dataProvider = "literalStrings")
+    @ParameterizedTest
+    @MethodSource("literalStrings")
     public void testParseString_Literal(String expected) throws IOException, ParseException {
         // Create literal string format: {length}\r\ndata
         byte[] bytes = expected.getBytes("UTF-8");
@@ -54,7 +56,7 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -87,7 +89,7 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -104,7 +106,7 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -118,7 +120,7 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, "Hello World");
+        assertEquals("Hello World", actual);
     }
 
     @Test
@@ -132,25 +134,25 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, "He said \"Hello\"");
+        assertEquals("He said \"Hello\"", actual);
     }
 
-    @DataProvider(name = "UTF8Multibyte")
-    public Object[][] createUTF8MultibyteStrings() {
-        return new Object[][]{
-                {"日本語"},  // Japanese (3 bytes per char)
-                {"한국어"},  // Korean
-                {"中文"},  // Chinese
-                {"العربية"},  // Arabic
-                {"עברית"},  // Hebrew
-                {"Ελληνικά"},  // Greek
-                {"Русский"},  // Russian (2 bytes per char)
-                {"🎉🎊🎈"},  // Emoji (4 bytes per char)
-                {"Mix: ABC 日本 123"},  // Mixed
-        };
+    static Stream<String> utf8MultibyteStrings() {
+        return Stream.of(
+                "日本語",  // Japanese (3 bytes per char)
+                "한국어",  // Korean
+                "中文",  // Chinese
+                "العربية",  // Arabic
+                "עברית",  // Hebrew
+                "Ελληνικά",  // Greek
+                "Русский",  // Russian (2 bytes per char)
+                "🎉🎊🎈",  // Emoji (4 bytes per char)
+                "Mix: ABC 日本 123"  // Mixed
+        );
     }
 
-    @Test(dataProvider = "UTF8Multibyte")
+    @ParameterizedTest
+    @MethodSource("utf8MultibyteStrings")
     public void testParseString_UTF8Multibyte(String expected) throws IOException, ParseException {
         // Important: length is in bytes, not characters
         byte[] bytes = expected.getBytes("UTF-8");
@@ -162,7 +164,7 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -190,19 +192,15 @@ public class ManageSieveClientStringEncodingTest {
         assertThat(newClient.getCapabilities()).isNull();
     }
 
-    @DataProvider(name = "invalidLiterals")
-    public Object[][] createInvalidLiterals() {
-        return new Object[][]{
-                {"{abc}\r\n"},  // Non-numeric length
-                {"{-5}\r\n"},  // Negative length
-                // Note: StreamTokenizer accepts LF-only and EOF as EOL
-                // RFC 5804 requires CRLF, but the implementation is lenient
-                // {"{10}\n"},  // Missing CR (LF only) - lenient parsing
-                // {"{10}"},    // Missing CRLF (EOF) - lenient parsing
-        };
+    static Stream<String> invalidLiterals() {
+        return Stream.of(
+                "{abc}\r\n",  // Non-numeric length
+                "{-5}\r\n"    // Negative length
+        );
     }
 
-    @Test(dataProvider = "invalidLiterals")
+    @ParameterizedTest
+    @MethodSource("invalidLiterals")
     public void testParseString_InvalidLiteral(String encoded) {
         StringReader in = new StringReader(encoded);
         StringWriter out = new StringWriter();
@@ -244,7 +242,7 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, str);
+        assertEquals(str, actual);
     }
 
     @Test
@@ -278,7 +276,7 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -295,6 +293,6 @@ public class ManageSieveClientStringEncodingTest {
         client.setupForTesting(in, out);
         String actual = client.parseString();
 
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
     }
 }
