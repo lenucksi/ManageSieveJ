@@ -1,5 +1,35 @@
 # Changelog
 
+## [0.3.8](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.7...managesievej-v0.3.8) (2025-11-22)
+
+
+### Bug Fixes
+
+* **client:** properly close InputStreamReader to prevent resource leak ([65097bf](https://github.com/lenucksi/ManageSieveJ/commit/65097bf3012e20757beb5cda5b8d0091b0419f9c))
+
+
+### Code Refactoring
+
+* **claude-harness:** Add TDD claude infra ([c47ae6b](https://github.com/lenucksi/ManageSieveJ/commit/c47ae6baf1cf43837f107ecd1ea869be5b236257))
+
+
+### Documentation
+
+* improve markdown formatting and add release documentation ([4798095](https://github.com/lenucksi/ManageSieveJ/commit/479809502c1bd8a99f2975c48a4a5bda7959adb9))
+
+
+### Tests
+
+* **coverage:** add unit tests for data model and utility classes ([d459783](https://github.com/lenucksi/ManageSieveJ/commit/d4597836bf2c9e7e6ededd802b8d796ae31d852b))
+* **framework:** migrate from TestNG to JUnit 5 with Jazzer fuzz testing ([1b77d08](https://github.com/lenucksi/ManageSieveJ/commit/1b77d08c71278571ff075a6b861d191b7f14591d))
+
+
+### Continuous Integration
+
+* **dev:** add Claude Code agent configurations for ManageSieveJ ([b877f2b](https://github.com/lenucksi/ManageSieveJ/commit/b877f2be8ba94ed9902aea2192b42b12ee8dbffe))
+* **dev:** add pre-commit hooks configuration ([491016f](https://github.com/lenucksi/ManageSieveJ/commit/491016fffcbf100c3b35a606940bc62deb69b75b))
+* integrate SonarCloud with Maven for code analysis ([b4da84c](https://github.com/lenucksi/ManageSieveJ/commit/b4da84c2dfb8300174c4ab1ba085c14503c3a81b))
+
 ## [0.3.7](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.6...managesievej-v0.3.7) (2025-11-18)
 
 
