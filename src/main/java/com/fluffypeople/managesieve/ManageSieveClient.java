@@ -85,6 +85,7 @@ public class ManageSieveClient {
     private Socket socket = null;
     private ServerCapabilities cap;
     private StreamTokenizer in;
+    private Reader inputReader;  // Stored for proper resource cleanup (CWE-404)
     private PrintWriter out;
     private String hostname;
     private int socketTimeout = 0; // Default socket timeout is zero, or don't time out.
@@ -538,20 +539,23 @@ public class ManageSieveClient {
         IOException firstException = null;
 
         // Close reader (input stream chain)
-        if (in != null) {
+        // StreamTokenizer doesn't have a close method, so we close the stored Reader
+        if (inputReader != null) {
             try {
-                // StreamTokenizer doesn't have a close method, but we need to close
-                // the underlying Reader. We can't access it directly, so we'll close
-                // the socket which will close all streams.
-                log.log(Level.FINEST, "Closing input stream");
-            } catch (Exception e) {
-                log.log(Level.WARNING, "Error preparing to close input stream", e);
-                if (firstException == null && e instanceof IOException) {
-                    firstException = (IOException) e;
+                log.log(Level.FINEST, "Closing input reader");
+                inputReader.close();
+            } catch (IOException e) {
+                log.log(Level.WARNING, "Error closing input reader", e);
+                if (firstException == null) {
+                    firstException = e;
                 }
             } finally {
+                inputReader = null;
                 in = null;
             }
+        } else if (in != null) {
+            // For testing scenarios where inputReader is not set
+            in = null;
         }
 
         // Close writer (output stream chain)
@@ -910,7 +914,8 @@ public class ManageSieveClient {
             sslSocket.setSSLParameters(sslParams);
         }
         final BufferedInputStream byteStream = new BufferedInputStream(sock.getInputStream());
-        in = new StreamTokenizer(new InputStreamReader(byteStream, UTF8));
+        inputReader = new InputStreamReader(byteStream, UTF8);
+        in = new StreamTokenizer(inputReader);
         setupTokenizer();
         out = new PrintWriter(new OutputStreamWriter(sock.getOutputStream(), UTF8));
     }
