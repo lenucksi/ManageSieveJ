@@ -820,6 +820,22 @@ public class ManageSieveClient {
                 // Remember to reset the tokenizer now we're done
                 setupTokenizer();
 
+                setupTokenizer();
+
+                // Ensure input resource is closed after reading
+                if (in != null) {
+                    try {
+                        if (in instanceof StreamTokenizer) {
+                            Reader reader = ((StreamTokenizer)in).getReader(); // If available
+                            if (reader != null) {
+                                reader.close();
+                            }
+                        }
+                    } catch (IOException e) {
+                        log.log(Level.WARNING, "Failed to close input resource", e);
+                    }
+                }
+                
                 return new String(buff, 0, count, UTF8);
             default:
                 throw new ParseException("Expecting DQUOTE or {, got " + tokenToString(token) + " at line " + in.lineno());
