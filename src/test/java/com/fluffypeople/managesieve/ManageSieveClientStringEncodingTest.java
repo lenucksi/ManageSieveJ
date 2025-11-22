@@ -248,7 +248,7 @@ public class ManageSieveClientStringEncodingTest {
     @Test
     public void testParseString_WrongUTF8Length() {
         // Use character count instead of byte count (common mistake)
-        String str = "ÄÖÜ";  // 3 chars but 6 bytes
+
 
         String encoded = "{3}\r\nÄÖÜ";  // Wrong! Should be {6}
 
