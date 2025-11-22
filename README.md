@@ -1,37 +1,37 @@
 # Introduction
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ?ref=badge_shield)
 
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ?ref=badge_shield)
 
 [Sieve][1] is a simple mail filtering language. Users scripts are stored and run on
 the mail server, and are managed through the [Manage Sieve][2] protocol. This library
 provides a Java API to the Manage Sieve protocol.
 
-# Dependencies
+## Dependencies
 
 No runtime dependencies are required.
 
 The Unit tests use testng.
 
-# Example
+## Example
 
-There is an example use of the library in the 
+There is an example use of the library in the
 com.fluffypeople.managesieve.examples package.
 
-# Maven
+## Maven
+
     <dependency>
       <groupId>com.fluffypeople</groupId>
       <artifactId>managesievej</artifactId>
       <version>0.3.1</version>
     </dependency>
 
-# Licence
+## Licence
 
-This library is covered by the MIT licence. 
-
+This library is covered by the MIT licence.
 
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Flenucksi%2FManageSieveJ?ref=badge_large)
 
-# References
+## References
 
-[1]: http://tools.ietf.org/html/rfc3028 "Sieve RFC"
-[2]: http://tools.ietf.org/html/rfc5804 "Manage Sieve RFC"
+[1]: <http://tools.ietf.org/html/rfc3028> "Sieve RFC"
+[2]: <http://tools.ietf.org/html/rfc5804> "Manage Sieve RFC"

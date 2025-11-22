@@ -35,13 +35,14 @@ Add to your `pom.xml`:
 ## Version Options
 
 You can use:
+
 - **Release tags**: `v0.3.3` (recommended)
 - **Branch names**: `main-SNAPSHOT` (for latest from main)
 - **Commit hashes**: `abc1234` (for specific commit)
 
 ## Build Status
 
-Check build status at: https://jitpack.io/#lenucksi/ManageSieveJ
+Check build status at: <https://jitpack.io/#lenucksi/ManageSieveJ>
 
 ## Alternative: GitHub Packages
 

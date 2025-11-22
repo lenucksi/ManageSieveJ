@@ -7,6 +7,7 @@ This repository uses [release-please](https://github.com/googleapis/release-plea
 ## How It Works
 
 ### 1. Conventional Commits
+
 All commits should follow the [Conventional Commits](https://www.conventionalcommits.org/) specification:
 
 - `feat:` - New features (triggers minor version bump)
@@ -24,7 +25,9 @@ All commits should follow the [Conventional Commits](https://www.conventionalcom
 **Breaking changes:** Add `!` after type or include `BREAKING CHANGE:` in commit body for major version bump.
 
 ### 2. Release Please PR
+
 When commits are pushed to `main`, release-please will:
+
 1. Analyze commits since last release
 2. Determine next version based on conventional commits
 3. Create/update a "release PR" with:
@@ -33,7 +36,9 @@ When commits are pushed to `main`, release-please will:
    - Updated `.release-please-manifest.json`
 
 ### 3. Merging the Release PR
+
 When you merge the release PR:
+
 1. Release-please creates a GitHub release with:
    - Git tag (e.g., `v0.3.3`)
    - Release notes from changelog
@@ -47,7 +52,9 @@ When you merge the release PR:
 ## Configuration Files
 
 ### `.release-please-manifest.json`
+
 Tracks the current version:
+
 ```json
 {
   ".": "0.3.2"
@@ -55,7 +62,9 @@ Tracks the current version:
 ```
 
 ### `.github/release-please-config.json`
+
 Configures release behavior:
+
 ```json
 {
   "release-type": "maven",
@@ -79,6 +88,7 @@ Configures release behavior:
 ## Manual Release
 
 To trigger a manual release:
+
 1. Go to Actions → Release workflow
 2. Click "Run workflow"
 3. Select branch `main`
@@ -152,16 +162,19 @@ Requires GitHub Packages authentication in `~/.m2/settings.xml`:
 ## Troubleshooting
 
 ### Release PR not created
+
 - Ensure commits use conventional commit format
 - Check that commits exist since last release
 - Verify workflow has necessary permissions
 
 ### Publishing fails
+
 - Ensure GitHub token has `packages: write` permission
 - Check Maven configuration in `pom.xml`
 - Verify `distributionManagement` points to correct repository
 
 ### Version not updated in pom.xml
+
 - Check `extra-files` configuration in `release-please-config.json`
 - Ensure `xmlpath` is correct: `/project/version`
 

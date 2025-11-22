@@ -4,7 +4,7 @@ This directory contains the Claude Code harness configuration for ManageSieveJ d
 
 ## Structure
 
-```
+```text
 .claude/
 ├── commands/          # Slash commands for common tasks
 │   ├── build.md      # Build the project
@@ -21,27 +21,35 @@ This directory contains the Claude Code harness configuration for ManageSieveJ d
 ## Available Commands
 
 ### `/build`
+
 Builds the ManageSieveJ project using Maven (`mvn clean compile`).
 
 ### `/test`
+
 Runs the TestNG test suite (`mvn test`).
 
 ### `/clean`
+
 Cleans all Maven build artifacts (`mvn clean`).
 
 ### `/package`
+
 Compiles, tests, and packages the project into a JAR file (`mvn clean package`).
 
 ### `/coverage`
+
 Runs tests with JaCoCo code coverage analysis (`mvn clean test jacoco:report`).
 
 ### `/verify`
+
 Runs the full Maven verification lifecycle including all tests and packaging (`mvn clean verify`).
 
 ## Hooks
 
 ### SessionStart
+
 Automatically runs when a Claude Code session starts. It:
+
 - Verifies Java and Maven installations
 - Checks for pom.xml
 - Displays project information

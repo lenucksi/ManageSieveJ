@@ -2,7 +2,10 @@
 description: Run full Maven verification including tests
 ---
 
+# Verify
+
 Run the full Maven verification lifecycle by executing `mvn clean verify`. This will:
+
 - Clean previous builds
 - Compile source code
 - Run all tests
