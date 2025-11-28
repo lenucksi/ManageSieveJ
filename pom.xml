@@ -159,7 +159,7 @@
         <dependency>
             <groupId>com.code-intelligence</groupId>
             <artifactId>jazzer-junit</artifactId>
-            <version>0.27.0</version>
+            <version>0.28.0</version>
             <scope>test</scope>
             <exclusions>
                 <!-- Exclude older JUnit platform versions that conflict with JUnit 5.11 -->
