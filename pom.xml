@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fluffypeople</groupId>
     <artifactId>managesievej</artifactId>
-    <version>0.3.8-SNAPSHOT</version>
+    <version>0.3.8</version>
     <packaging>jar</packaging>
     <name>ManageSieveJ</name>
     <url>https://github.com/lenucksi/ManageSieveJ</url>
@@ -51,7 +51,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.3.1</version>
+                <version>3.4.0</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -110,7 +110,7 @@
                 <plugin>
                     <groupId>org.sonarsource.scanner.maven</groupId>
                     <artifactId>sonar-maven-plugin</artifactId>
-                    <version>5.0.0.4389</version>
+                    <version>5.4.0.6343</version>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -134,7 +134,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.11.4</version>
+            <version>6.0.1</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -153,14 +153,14 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.16</version>
+            <version>2.0.17</version>
             <scope>test</scope>
         </dependency>
         <!-- Jazzer for fuzz testing -->
         <dependency>
             <groupId>com.code-intelligence</groupId>
             <artifactId>jazzer-junit</artifactId>
-            <version>0.26.0</version>
+            <version>0.28.0</version>
             <scope>test</scope>
             <exclusions>
                 <!-- Exclude older JUnit platform versions that conflict with JUnit 5.11 -->
