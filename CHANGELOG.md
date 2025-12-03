@@ -130,3 +130,22 @@
 
 * add Maven wrapper for JitPack compatibility and fix build configuration ([47123e3](https://github.com/lenucksi/ManageSieveJ/commit/47123e362e9c5a319a56fecf9c3d5ec36e447ad0))
 * upgrade CodeQL Action from v3 to v4 ([b221169](https://github.com/lenucksi/ManageSieveJ/commit/b2211691440cf754019c2f0074349feb663c5936))
+
+
+## v0.3.1
+
+- Better unicode support
+
+## v0.3.0 - 2018-10-23
+
+- Fixed NPE in isConnected (Thanks MoriTanosuke)
+
+## v 0.2.2 - 2017-01-02
+
+- Add explicit UTF-8 to output PrintWriter (Thanks blankcody)
+- Also, a bunch of random reformatting and fixing spelling mistakes
+
+## v 0.2.1
+
+- Better SSL support.
+  - Specifically, match alt names in certificates. Thanks Ricardo Nooijen!
