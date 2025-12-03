@@ -30,8 +30,8 @@
         </developer>
     </developers>
     <scm>
-        <connection>scm:git:git://github.com/lenucksi/ManageSieveJ.git</connection>
-        <developerConnection>scm:git:git@github.com:lenucksi/ManageSieveJ.git</developerConnection>
+        <connection>scm:git:https://github.com/lenucksi/ManageSieveJ.git</connection>
+        <developerConnection>scm:git:https://github.com:lenucksi/ManageSieveJ.git</developerConnection>
         <url>https://github.com/lenucksi/ManageSieveJ</url>
     </scm>
     <build>
