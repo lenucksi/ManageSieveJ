@@ -134,3 +134,6 @@ buildNumber.properties
 
 # Developer documentation (not for public distribution)
 dev-docs/
+
+.rumdl_cache
+.rumdl-cache
