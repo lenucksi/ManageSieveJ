@@ -41,7 +41,7 @@ jobs:
         uses: googleapis/release-please-action@16a9c90856f42705d54a6fda1823352bdc62cf38 # v4.4.0
         with:
           config-file: .github/release-please-config.json
-          manifest-file: .release-please-manifest.json
+          manifest-file: .github/.release-please-manifest.json
 
   build-and-publish:
     name: Build and Publish to GitHub Packages
@@ -225,4 +225,3 @@ jobs:
           # Trigger build by requesting the artifact (30 second timeout to avoid waiting for full build)
           curl -s -m 30 "https://jitpack.io/com/github/lenucksi/ManageSieveJ/${{ needs.release-please.outputs.tag_name }}/build.log" || true
           echo "JitPack build triggered. Check status at: https://jitpack.io/com/github/lenucksi/ManageSieveJ/${{ needs.release-please.outputs.tag_name }}"
-
