@@ -1,5 +1,30 @@
 # Changelog
 
+## [0.3.9](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.8...managesievej-v0.3.9) (2025-12-04)
+
+
+### Bug Fixes
+
+* **changelog:** Merge old and new changelog ([89a48a5](https://github.com/lenucksi/ManageSieveJ/commit/89a48a5dd16bfbf49910299da881f6723d361e7d))
+* **gitignore:** Update .gitignore for rumdl ([3fc1ff2](https://github.com/lenucksi/ManageSieveJ/commit/3fc1ff24d2fa0f16a5fe20b394f2a64211b0e35c))
+* **pom.xml:** SCM link to https connection ([a8b8b79](https://github.com/lenucksi/ManageSieveJ/commit/a8b8b79396e59ef6c36777db239a46b5afa83909))
+* **sonarqube:** Sonar integration fix ([0bc10a1](https://github.com/lenucksi/ManageSieveJ/commit/0bc10a1c0ae33baf9c204619452b82f6c441cd8b))
+
+
+### Dependencies
+
+* **deps-dev:** bump com.code-intelligence:jazzer-junit ([d2ffc06](https://github.com/lenucksi/ManageSieveJ/commit/d2ffc068e58ff5eaed85ea031057326a35246c88))
+* **deps-dev:** bump com.code-intelligence:jazzer-junit ([6ed0a07](https://github.com/lenucksi/ManageSieveJ/commit/6ed0a07132a23a8741b8e385fcfe99382ab849d9))
+* **deps-dev:** bump org.junit.jupiter:junit-jupiter ([7e9de00](https://github.com/lenucksi/ManageSieveJ/commit/7e9de0011f50de015954949ac8ea8df0d92b77e1))
+* **deps-dev:** bump org.slf4j:slf4j-simple from 2.0.16 to 2.0.17 ([b89b97e](https://github.com/lenucksi/ManageSieveJ/commit/b89b97e15754b4c4447905c547edbb8103ae13f6))
+* **deps:** bump actions/attest-build-provenance from 1.4.3 to 3.0.0 ([4b52cee](https://github.com/lenucksi/ManageSieveJ/commit/4b52cee87c5fee791aa0601a8978055fc5ea3359))
+* **deps:** bump actions/cache from 4.2.3 to 4.3.0 ([7fc1385](https://github.com/lenucksi/ManageSieveJ/commit/7fc13853f754a407fcdd2696858bbef55ae7af83))
+* **deps:** bump actions/dependency-review-action from 4.4.0 to 4.8.2 ([91638dc](https://github.com/lenucksi/ManageSieveJ/commit/91638dc758164f16b5ec6cd0735acba4a3c69435))
+* **deps:** bump actions/setup-java from 4.5.0 to 5.0.0 ([69bbe92](https://github.com/lenucksi/ManageSieveJ/commit/69bbe926bdbed0737ff964959fb545e900995534))
+* **deps:** bump actions/upload-artifact from 4.5.0 to 5.0.0 ([946f423](https://github.com/lenucksi/ManageSieveJ/commit/946f423625ea4c23ba4dbdad5f1c8f1f5f9096ee))
+* **deps:** bump org.apache.maven.plugins:maven-source-plugin ([db29186](https://github.com/lenucksi/ManageSieveJ/commit/db29186956d54f60c5366ecb03e0d1ba69005de5))
+* **deps:** bump org.sonarsource.scanner.maven:sonar-maven-plugin ([5763ef6](https://github.com/lenucksi/ManageSieveJ/commit/5763ef6ed4d54e8bb61ed69ca28721f068545160))
+
 ## [0.3.8](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.7...managesievej-v0.3.8) (2025-11-22)
 
 
