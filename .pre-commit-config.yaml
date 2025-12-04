@@ -17,8 +17,12 @@ repos:
   hooks:
     - id: conventional-precommit-linter
       stages: [commit-msg]
+      args:
+        - --types=feat,fix,docs,style,refactor,test,chore,ci,build,perf,remove,revert,change
+        - --allow-breaking
+        - --subject-min-length=15
 - repo: https://github.com/rvben/rumdl-pre-commit
-  rev: v0.0.187  # Use a stable release tag
+  rev: v0.0.188  # Use a stable release tag
   hooks:
     - id: rumdl
       # To only check (default):
