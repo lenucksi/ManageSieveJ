@@ -4,13 +4,41 @@ dictionaryDefinitions: []
 dictionaries: []
 words:
   - assertj
+  - cdatas
+  - checkscript
+  - CHECKSCRIPT
+  - clbcks
+  - CURRLY
+  - deletescript
+  - DELETESCRIPT
+  - DQUOTE
   - fluffypeople
+  - GETSCRIPT
+  - havespace
+  - HAVESPACE
+  - hostnames
+  - HTAB
   - KeePass
   - KeePassXC
+  - Linagora
+  - listscripts
+  - LISTSCRIPTS
   - managesieve
+  - MAXREDIRECTS
+  - mult
+  - Osric
+  - putscript
+  - PUTSCRIPT
+  - refrence
+  - renamescript
+  - RENAMESCRIPT
+  - setactive
+  - SETACTIVE
+  - starttls
+  - STARTTLS
   - Ελληνικά
+  - Русский
   - עברית
   - العربية
-  - Русский
 ignoreWords: []
 import: []
