@@ -7,7 +7,6 @@ import java.io.Reader;
 import java.io.StringReader;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.catchThrowable;
 
 /**
  * Tests for NoisyReader class.

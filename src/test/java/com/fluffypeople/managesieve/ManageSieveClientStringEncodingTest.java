@@ -31,16 +31,15 @@ public class ManageSieveClientStringEncodingTest {
     static Stream<String> literalStrings() {
         return Stream.of(
                 "Hello World",
-                "",  // Empty string
-                "Line1\r\nLine2",  // Multi-line
+                "", // Empty string
+                "Line1\r\nLine2", // Multi-line
                 "With\ttabs\tand\nnewlines",
                 "Special chars: !@#$%^&*()",
                 "Quotes: \"test\" and 'test'",
                 "Backslashes: \\ \\\\ \\\\\\",
-                "{10}\r\nNested",  // Nested literal string format
+                "{10}\r\nNested", // Nested literal string format
                 "Unicode: ÄÖÜäöü",
-                "Mixed:\r\n\t\"\\{"
-        );
+                "Mixed:\r\n\t\"\\{");
     }
 
     @ParameterizedTest
@@ -139,15 +138,15 @@ public class ManageSieveClientStringEncodingTest {
 
     static Stream<String> utf8MultibyteStrings() {
         return Stream.of(
-                "日本語",  // Japanese (3 bytes per char)
-                "한국어",  // Korean
-                "中文",  // Chinese
-                "العربية",  // Arabic
-                "עברית",  // Hebrew
-                "Ελληνικά",  // Greek
-                "Русский",  // Russian (2 bytes per char)
-                "🎉🎊🎈",  // Emoji (4 bytes per char)
-                "Mix: ABC 日本 123"  // Mixed
+                "日本語", // Japanese (3 bytes per char)
+                "한국어", // Korean
+                "中文", // Chinese
+                "العربية", // Arabic
+                "עברית", // Hebrew
+                "Ελληνικά", // Greek
+                "Русский", // Russian (2 bytes per char)
+                "🎉🎊🎈", // Emoji (4 bytes per char)
+                "Mix: ABC 日本 123" // Mixed
         );
     }
 
@@ -194,8 +193,8 @@ public class ManageSieveClientStringEncodingTest {
 
     static Stream<String> invalidLiterals() {
         return Stream.of(
-                "{abc}\r\n",  // Non-numeric length
-                "{-5}\r\n"    // Negative length
+                "{abc}\r\n", // Non-numeric length
+                "{-5}\r\n" // Negative length
         );
     }
 
@@ -229,10 +228,10 @@ public class ManageSieveClientStringEncodingTest {
     @Test
     public void testParseString_ExactUTF8Length() throws IOException, ParseException {
         // Test that byte length is used, not character length
-        String str = "ÄÖÜ";  // 3 characters, but 6 bytes in UTF-8
+        String str = "ÄÖÜ"; // 3 characters, but 6 bytes in UTF-8
 
         byte[] bytes = str.getBytes("UTF-8");
-        assertThat(bytes.length).isEqualTo(6);  // Verify our assumption
+        assertThat(bytes.length).isEqualTo(6); // Verify our assumption
 
         String encoded = "{6}\r\nÄÖÜ";
 
@@ -248,9 +247,9 @@ public class ManageSieveClientStringEncodingTest {
     @Test
     public void testParseString_WrongUTF8Length() {
         // Use character count instead of byte count (common mistake)
-        String str = "ÄÖÜ";  // 3 chars but 6 bytes
+        // String str = "ÄÖÜ"; // 3 chars but 6 bytes
 
-        String encoded = "{3}\r\nÄÖÜ";  // Wrong! Should be {6}
+        String encoded = "{3}\r\nÄÖÜ"; // Wrong! Should be {6}
 
         StringReader in = new StringReader(encoded);
         StringWriter out = new StringWriter();
@@ -259,7 +258,7 @@ public class ManageSieveClientStringEncodingTest {
 
         // This will read only 3 bytes, which is incomplete UTF-8
         assertThatCode(() -> client.parseString())
-                .doesNotThrowAnyException();  // May or may not throw, depends on parsing
+                .doesNotThrowAnyException(); // May or may not throw, depends on parsing
     }
 
     @Test

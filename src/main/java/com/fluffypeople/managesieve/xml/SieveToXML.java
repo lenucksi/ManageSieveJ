@@ -40,7 +40,7 @@ public class SieveToXML {
 
     private static final Logger log = Logger.getLogger(SieveToXML.class.getName());
     private StreamTokenizer in;
-    private static final String[] CONTROL_NAMES = {"if", "elsif", "else", "stop", "require"};
+    private static final String[] CONTROL_NAMES = { "if", "elsif", "else", "stop", "require" };
 
     public XML convert(final String script) throws IOException, ParseException {
         return convert(new StringReader(script));
@@ -145,7 +145,7 @@ public class SieveToXML {
                 token = in.nextToken();
                 if (token == ':') {
                     // multi line string. Set tokenizer to ignore everything
-                    // but line endings and # comments. 
+                    // but line endings and # comments.
                     in.resetSyntax();
                     in.ordinaryChars(0, 255);
                     in.commentChar('#');

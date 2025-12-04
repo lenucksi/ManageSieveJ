@@ -1,0 +1,16 @@
+version: "0.2"
+ignorePaths: []
+dictionaryDefinitions: []
+dictionaries: []
+words:
+  - assertj
+  - fluffypeople
+  - KeePass
+  - KeePassXC
+  - managesieve
+  - Ελληνικά
+  - עברית
+  - العربية
+  - Русский
+ignoreWords: []
+import: []
