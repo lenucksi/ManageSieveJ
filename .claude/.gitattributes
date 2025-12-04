@@ -1,3 +1,0 @@
-# Ensure shell scripts always use LF line endings
-hooks/* text eol=lf
-*.sh text eol=lf
