@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.10](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.9...managesievej-v0.3.10) (2026-02-25)
+
+
+### Dependencies
+
+* **deps-dev:** Bump org.apache.maven.plugins:maven-compiler-plugin ([4467751](https://github.com/lenucksi/ManageSieveJ/commit/4467751622e0d250e163944a7dbdb5117b33eba0))
+* **deps-dev:** Bump org.junit.jupiter:junit-jupiter from 6.0.2 to 6.0.3 ([884d896](https://github.com/lenucksi/ManageSieveJ/commit/884d896f2df9bf99695679436e8f7ab004f9450b))
+
 ## [0.3.9](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.8...managesievej-v0.3.9) (2025-12-04)
 
 
