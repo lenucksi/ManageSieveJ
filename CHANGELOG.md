@@ -1,5 +1,19 @@
 # Changelog
 
+## [0.3.12](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.11...managesievej-v0.3.12) (2026-05-18)
+
+
+### Dependencies
+
+* **deps-dev:** bump org.slf4j:slf4j-simple from 2.0.17 to 2.0.18 ([e4da920](https://github.com/lenucksi/ManageSieveJ/commit/e4da9200a56e97e5b9979297f9d37fc9daeab6f8))
+* **deps-dev:** bump org.sonarsource.scanner.maven:sonar-maven-plugin ([8430a32](https://github.com/lenucksi/ManageSieveJ/commit/8430a325787e6c464f56cc1e542d4487378c4b09))
+* **deps:** bump actions/cache from 5.0.4 to 5.0.5 ([acc34f9](https://github.com/lenucksi/ManageSieveJ/commit/acc34f901bc55adc56c7dda04416649bd313ab01))
+* **deps:** bump actions/upload-artifact from 7.0.0 to 7.0.1 ([98d0b10](https://github.com/lenucksi/ManageSieveJ/commit/98d0b10823e6b6390ea7262f6ed7c0a1e6e4a65d))
+* **deps:** bump codecov/codecov-action from 5.5.3 to 6.0.0 ([2c1454c](https://github.com/lenucksi/ManageSieveJ/commit/2c1454c0c1ded9ffe722f022cf85965b24e2a8f8))
+* **deps:** bump github/codeql-action from 4.33.0 to 4.34.1 ([1c7c823](https://github.com/lenucksi/ManageSieveJ/commit/1c7c823acf2be662317415b9dc6fcc4e9683637d))
+* **deps:** bump github/codeql-action from 4.34.1 to 4.35.2 ([9e5f36f](https://github.com/lenucksi/ManageSieveJ/commit/9e5f36f2887845e62078ab3d11f181825376e8d3))
+* **deps:** bump step-security/harden-runner from 2.16.0 to 2.18.0 ([9483566](https://github.com/lenucksi/ManageSieveJ/commit/9483566526e659cd56716fed1cd27b318bfc355f))
+
 ## [0.3.11](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.10...managesievej-v0.3.11) (2026-02-25)
 
 
