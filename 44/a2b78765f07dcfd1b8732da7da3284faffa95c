@@ -1,0 +1,19 @@
+.github/workflows/actionlint.yml
+  s_8f46e03df89d6c::t_49a7b429796ba0 23-24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "44a2b78765f07dcfd1b8732da7da3284faffa95c",
+  "prompts": {},
+  "sessions": {
+    "s_8f46e03df89d6c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c4f2f8a0ffem8sMFXWHNVJw2u",
+        "model": "big-pickle"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
