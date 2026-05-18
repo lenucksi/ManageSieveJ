@@ -1,0 +1,27 @@
+tmp/rules-backup/managesievej-classic-protection.json
+  ai_agent 1-14
+.env.example
+  s_8f46e03df89d6c::t_4a72fc95dc648e 1-12
+.mcp.json
+  ai_agent 1-24
+.gitignore
+  s_8f46e03df89d6c::t_4a72fc95dc648e 140-163
+.github/workflows/ci.yml
+  s_8f46e03df89d6c::t_d459cf9a7c4643 1-187
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.8",
+  "base_commit_sha": "a6c72fbd2582adf66b96010ebc5c3b8452bb23c1",
+  "prompts": {},
+  "sessions": {
+    "s_8f46e03df89d6c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1c4f2f8a0ffem8sMFXWHNVJw2u",
+        "model": "big-pickle"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
