@@ -137,3 +137,18 @@ dev-docs/
 
 .rumdl_cache
 .rumdl-cache
+
+# Eclipse IDE
+.classpath
+.project
+.settings/
+
+# Temporary output (project-relative, NOT /tmp)
+tmp/
+
+# Node.js artifacts (not a JS project)
+node_modules/
+
+# GPG private key exports (do NOT commit)
+*.privkey
+*.pubkey

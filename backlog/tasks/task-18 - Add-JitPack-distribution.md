@@ -4,8 +4,10 @@ title: Add JitPack distribution
 status: Done
 assignee: []
 created_date: '2026-05-20 14:55'
+updated_date: '2026-05-20 20:16'
 labels:
   - build
+  - deprecated
 dependencies: []
 references:
   - JITPACK.md

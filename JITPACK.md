@@ -1,10 +1,11 @@
-# JitPack Integration
+# JitPack Integration (Deprecated)
 
-This project is available on JitPack for easy consumption without authentication requirements.
+> **⚠️ Deprecated:** This project now publishes to **Maven Central** under `io.github.lenucksi:managesievej`.
+> No extra repository configuration is needed. Please migrate your dependency declarations.
 
-## For Consumers (SieveEditor)
+## Legacy: JitPack
 
-Add to your `pom.xml`:
+Old releases are still available via JitPack, but no new releases will be published here.
 
 ```xml
 <repositories>
@@ -18,35 +19,14 @@ Add to your `pom.xml`:
     <dependency>
         <groupId>com.github.lenucksi</groupId>
         <artifactId>ManageSieveJ</artifactId>
-        <version>v0.3.3</version> <!-- Use latest release tag -->
+        <version>v0.3.3</version>
     </dependency>
 </dependencies>
 ```
 
-**No authentication required!** JitPack builds automatically from GitHub releases.
+## Legacy: GitHub Packages
 
-## How It Works
-
-1. Create a GitHub release with a version tag (e.g., `v0.3.3`)
-2. JitPack builds the project on-demand when first requested
-3. Cached for future requests
-4. Anyone can download without credentials
-
-## Version Options
-
-You can use:
-
-- **Release tags**: `v0.3.3` (recommended)
-- **Branch names**: `main-SNAPSHOT` (for latest from main)
-- **Commit hashes**: `abc1234` (for specific commit)
-
-## Build Status
-
-Check build status at: <https://jitpack.io/#lenucksi/ManageSieveJ>
-
-## Alternative: GitHub Packages
-
-This project is also published to GitHub Packages, but requires authentication:
+Old releases are also available via GitHub Packages (requires authentication).
 
 ```xml
 <repositories>
@@ -58,15 +38,13 @@ This project is also published to GitHub Packages, but requires authentication:
 
 <dependencies>
     <dependency>
-        <groupId>com.fluffypeople</groupId>
+        <groupId>io.github.lenucksi</groupId>
         <artifactId>managesievej</artifactId>
         <version>0.3.3</version>
     </dependency>
 </dependencies>
 ```
 
-Requires `~/.m2/settings.xml` configuration with GitHub token.
-
 ## Recommendation
 
-**Use JitPack** for public FOSS consumption - no authentication needed.
+**Use Maven Central** — no extra repository, no authentication, automatic dependency resolution.

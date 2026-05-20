@@ -17,11 +17,16 @@ com.fluffypeople.managesieve.examples package.
 
 ## Maven
 
+Available on Maven Central — no extra repository needed:
+
     <dependency>
-      <groupId>com.fluffypeople</groupId>
+      <groupId>io.github.lenucksi</groupId>
       <artifactId>managesievej</artifactId>
-      <version>0.3.1</version>
+      <version>0.3.13-SNAPSHOT</version>
     </dependency>
+
+> **Note:** The old groupId `com.fluffypeople` is no longer published by this fork.
+> Previous versions are still available on Maven Central under `com.fluffypeople`.
 
 ## Licence
 

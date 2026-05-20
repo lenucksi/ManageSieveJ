@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.fluffypeople</groupId>
+    <groupId>io.github.lenucksi</groupId>
     <artifactId>managesievej</artifactId>
     <version>0.3.13-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -145,6 +145,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
+        <gpg.keyname>managesievej@lenucksi.github.io</gpg.keyname>
 
         <!-- SonarCloud configuration -->
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -209,20 +210,6 @@
         </dependency>
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>jitpack.io</id>
-            <name>JitPack Repository</name>
-            <url>https://jitpack.io</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
     <distributionManagement>
         <repository>
             <id>github</id>
@@ -230,4 +217,50 @@
             <url>https://maven.pkg.github.com/lenucksi/ManageSieveJ</url>
         </repository>
     </distributionManagement>
+
+    <profiles>
+        <profile>
+            <id>central</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>3.2.7</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                                <configuration>
+                                    <keyname>${gpg.keyname}</keyname>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.sonatype.central</groupId>
+                        <artifactId>central-publishing-maven-plugin</artifactId>
+                        <version>0.10.0</version>
+                        <executions>
+                            <execution>
+                                <id>deploy-artifacts</id>
+                                <goals>
+                                    <goal>publish</goal>
+                                </goals>
+                                <phase>deploy</phase>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <autoPublish>true</autoPublish>
+                            <waitUntil>published</waitUntil>
+                            <publishingServerId>central</publishingServerId>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
