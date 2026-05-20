@@ -19,6 +19,20 @@
 				"AZURE_OPENAI_API_KEY": "YOUR_AZURE_KEY_HERE",
 				"OLLAMA_API_KEY": "YOUR_OLLAMA_API_KEY_HERE"
 			}
+		},
+		"sonarqube": {
+			"type": "stdio",
+			"command": "java",
+			"args": [
+				"-jar",
+				"sonarqube-mcp-server.jar",
+				"--transport",
+				"stdio"
+			],
+			"env": {
+				"SONAR_HOST_URL": "https://sonarcloud.io",
+				"SONAR_TOKEN": "${SONAR_TOKEN}"
+			}
 		}
 	}
 }
