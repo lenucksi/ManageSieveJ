@@ -1,0 +1,27 @@
+.github/workflows/release.yml
+  s_2695e508841223::t_b2281cb15a80a0 93
+.github/workflows/ci.yml
+  s_2695e508841223::t_8d84bdcaab1797 75
+  s_2695e508841223::t_e63cab882c26f6 187
+.github/workflows/security-supply-chain.yml
+  s_2695e508841223::t_68637e0120353b 84
+  s_2695e508841223::t_452c29f857ea49 78,93
+  s_2695e508841223::t_c4a3c26af79a85 39,46
+  s_2695e508841223::t_61dcf14741f1b2 68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "ec1d433785bd467618d23d98a1a72a5a41e604b8",
+  "prompts": {},
+  "sessions": {
+    "s_2695e508841223": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1b919e1b1ffeh30eeTlXDCPejL",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
