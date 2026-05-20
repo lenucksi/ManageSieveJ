@@ -1,0 +1,20 @@
+.github/workflows/release.yml
+  s_2695e508841223::t_43542b7cecdb48 66,68
+  s_2695e508841223::t_45f60abf63eb80 69-72
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "8a2d4b7c60bbd2d088f8766ce790df5947f8a9e3",
+  "prompts": {},
+  "sessions": {
+    "s_2695e508841223": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1b919e1b1ffeh30eeTlXDCPejL",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
