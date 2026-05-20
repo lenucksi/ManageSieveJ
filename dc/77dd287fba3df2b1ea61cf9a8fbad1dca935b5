@@ -1,0 +1,78 @@
+src/test/java/com/fluffypeople/managesieve/xml/SieveToXMLTest.java
+  s_a7d4fa1d4e6de6::t_33ae6bc05d4f99 556,558-559
+  s_a7d4fa1d4e6de6::t_de141a4cf4d6d8 248
+  s_a7d4fa1d4e6de6::t_ed63c1d50f2177 589-595
+  s_a7d4fa1d4e6de6::t_4576fc2cc014bb 532-536
+  s_e663b1711dc419::t_a889f13511cb9d 298-299,305,311,317
+  s_a7d4fa1d4e6de6::t_10644c7b063ad2 443
+  s_a7d4fa1d4e6de6::t_fefc85b78fa4a9 287
+  s_a7d4fa1d4e6de6::t_0d3de82e84b603 140
+  s_e663b1711dc419::t_59a87337ebfbc2 531,537-539
+  s_a7d4fa1d4e6de6::t_92db49ed505f90 1-139,141-247,249-286,288-297,300-304,306-310,312-316,318-442,444-530,540-555,557,560-588,596-598
+.mcp.json
+  s_378c32c0c4004a::t_b7d8e189499180 22-35
+src/test/java/com/fluffypeople/managesieve/ManageSieveClientTest.java
+  s_5d7c391e716246::t_8091e78cccf7f7 689
+  s_5d7c391e716246::t_d65c01fcdf580c 798
+  s_5d7c391e716246::t_84b21ef838b1e0 148
+  s_5d7c391e716246::t_0465e798f538b2 996,999-1001
+  s_5d7c391e716246::t_71590eca302384 1102
+  s_5d7c391e716246::t_a062c51c99d8de 259
+  s_378c32c0c4004a::t_1ad43bb81f2e7b 1105-1160,1162-1163
+  s_5d7c391e716246::t_4382c65c4e6ac8 860-892,896-897,901-904
+  s_5d7c391e716246::t_6702fc65e60b97 220
+  s_5d7c391e716246::t_9ea6696ab54535 729-730,734
+  s_5d7c391e716246::t_e231560718dc35 3-5,8-10,12,14-15,17-20,23-25,28-30,32-35,37-40,42-147,149-219,221-258,260-688,690-728,731-733,735-797,799-859,905-995,997-998,1002-1100,1103
+  s_5d7c391e716246::t_9de5a84b4891b9 893-895,898-900
+pom.xml
+  s_378c32c0c4004a::t_f5703258b8aa9f 89-93
+  s_378c32c0c4004a::t_7b7d26f8f2db10 109
+  s_378c32c0c4004a::t_1a904fea5ab17f 107-108,110-127
+src/test/java/com/fluffypeople/managesieve/xml/XMLTest.java
+  s_e663b1711dc419::t_0e9a1b616b8269 152-158
+  s_e663b1711dc419::t_df927f24390191 427-433
+  s_5d7c391e716246::t_a44e4930b6b684 7
+  s_e663b1711dc419::t_52358ed36dd98a 177-186
+  s_e663b1711dc419::t_488b53b03ff2f7 1-6,8-151,159-176,187-378,381-426,434-435
+  s_e663b1711dc419::t_ad33b347a1abca 379-380
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "dc77dd287fba3df2b1ea61cf9a8fbad1dca935b5",
+  "prompts": {},
+  "sessions": {
+    "s_378c32c0c4004a": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1b96c4146ffesn9LrHohHC6h8c",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_5d7c391e716246": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1b95e65f6ffepfy9WhC3pBUoom",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_a7d4fa1d4e6de6": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1b95e3ed6ffedeEmdPLduSpUP7",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    },
+    "s_e663b1711dc419": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1b95e12deffels8imJDPN8H2Th",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
