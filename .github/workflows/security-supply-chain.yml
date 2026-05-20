@@ -57,7 +57,7 @@ jobs:
 
       - name: Generate SBOM with cdxgen
         run: |
-          docker run --rm -v $PWD:/app ghcr.io/cyclonedx/cdxgen@sha256:3c0c4ee1f8e2d67a5a7f6f944e91f0cc6e4af4a4f5c6b43ca3182e1faf3e33dc \
+          docker run --rm -v $PWD:/app ghcr.io/cyclonedx/cdxgen:10.10.7 \
             -r /app \
             -o /app/target/sbom-cdxgen.json \
             -t maven || true
@@ -65,7 +65,7 @@ jobs:
       # ── Vulnerability Scanning (parallel tracks) ──
 
       - name: Scan source with Trivy
-        uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8 # v0.36.0
+        uses: aquasecurity/trivy-action@ed142fd0673e97e23eac54620cfb913e5ce36c25 # v0.36.0
         with:
           scan-type: fs
           scan-ref: .
