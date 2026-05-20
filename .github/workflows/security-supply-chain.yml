@@ -36,14 +36,14 @@ jobs:
       # ── SBOM Generation (parallel tracks) ──
 
       - name: Generate SBOM with Syft (source scan)
-        uses: anchore/sbom-action@ab9d16d4b419c9d1a02df5213fa0ebe965ca5a57 # v0.17.1
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
         with:
           path: ./
           format: cyclonedx-json
           output-file: sbom-syft.cdx.json
 
       - name: Generate SBOM with Syft (SPDX)
-        uses: anchore/sbom-action@ab9d16d4b419c9d1a02df5213fa0ebe965ca5a57 # v0.17.1
+        uses: anchore/sbom-action@e22c389904149dbc22b58101806040fa8d37a610 # v0.24.0
         with:
           path: ./
           format: spdx-json
@@ -65,7 +65,7 @@ jobs:
       # ── Vulnerability Scanning (parallel tracks) ──
 
       - name: Scan source with Trivy
-        uses: aquasecurity/trivy-action@18f2510ee396bbf400402947b394f2dd8c87dbb0 # v0.29.0
+        uses: aquasecurity/trivy-action@a9c7b0f06e461e9d4b4d1711f154ee024b8d7ab8 # v0.36.0
         with:
           scan-type: fs
           scan-ref: .
@@ -75,13 +75,13 @@ jobs:
           exit-code: 0
 
       - name: Upload Trivy SARIF
-        uses: github/codeql-action/upload-sarif@c29f4eedf1fb43be1c9b9611f2e861ca03ad0008 # v3.28.16
+        uses: github/codeql-action/upload-sarif@9e0d7b8d25671d64c341c19c0152d693099fb5ba # v4.35.5
         with:
           sarif_file: trivy-results.sarif
           category: trivy
 
       - name: Scan SBOM with Grype
-        uses: anchore/scan-action@f6601287cdb1efc985d6b765bbf99cb4c0ac29d8 # v7.0.0
+        uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
         id: grype
         with:
           sbom: target/sbom-cyclonedx-maven.json
@@ -90,7 +90,7 @@ jobs:
           fail-build: false
 
       - name: Upload Grype SARIF
-        uses: github/codeql-action/upload-sarif@c29f4eedf1fb43be1c9b9611f2e861ca03ad0008 # v3.28.16
+        uses: github/codeql-action/upload-sarif@9e0d7b8d25671d64c341c19c0152d693099fb5ba # v4.35.5
         with:
           sarif_file: ${{ steps.grype.outputs.sarif }}
           category: grype
