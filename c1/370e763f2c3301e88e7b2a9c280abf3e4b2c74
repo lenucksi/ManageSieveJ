@@ -1,0 +1,96 @@
+"backlog/decisions/decision-7 - SASL-PLAIN-auth-inherited-from-upstream.md"
+  s_002e5ca712a28f::t_17907412813ef8 1-6,8-9,11-13,15-16
+  s_002e5ca712a28f::t_8b8352542b2c32 7
+  s_002e5ca712a28f::t_19d061cbba3acd 10,14,17-18
+"backlog/tasks/task-1 - Fix-wildcard-hostname-support.md"
+  s_002e5ca712a28f::t_fb820290001c07 1-21
+"backlog/tasks/task-10 - Migrate-from-TestNG-to-JUnit-5.md"
+  s_002e5ca712a28f::t_6c605c712a5b56 1-21
+"backlog/tasks/task-14 - Add-OpenSSF-Scorecard-SLSA-provenance.md"
+  s_002e5ca712a28f::t_fa6606e96b3346 1-21
+"backlog/decisions/decision-4 - Claude-Code-harness-with-agents.md"
+  s_002e5ca712a28f::t_17907412813ef8 1-6,8-9,11-13,15-16
+  s_002e5ca712a28f::t_56beb534de3e23 10,14,17-18
+  s_002e5ca712a28f::t_8b8352542b2c32 7
+backlog/config.yml
+  s_002e5ca712a28f::t_a92f89e1f3c37b 1-15
+"backlog/tasks/task-19 - Fix-TLS-trustmanager-removal.md"
+  s_002e5ca712a28f::t_d474a515724caf 1-20
+"backlog/tasks/task-3 - Fix-protocol-injection-vulnerability.md"
+  s_002e5ca712a28f::t_ade5c450da5cf3 1-20
+"backlog/tasks/task-11 - Upgrade-to-Java-21-LTS.md"
+  s_002e5ca712a28f::t_f6b394a52223a1 1-20
+"backlog/tasks/task-16 - Implement-release-automation-with-release-please.md"
+  s_002e5ca712a28f::t_42f3a3de2d76b6 1-21
+.env.example
+  ai_agent 1-12
+"backlog/docs/security/doc-2 - Security-Audit-Results.md"
+  s_002e5ca712a28f::t_8b8352542b2c32 6,9-33
+  s_002e5ca712a28f::t_11aa24449a4bd1 1-5,7-8
+"backlog/tasks/task-13 - Set-up-CI-CD-with-GitHub-Actions.md"
+  s_002e5ca712a28f::t_1b3cb9a018c285 1-20
+.mcp.json
+  ai_agent 1-24
+"backlog/decisions/decision-1 - TestNG-to-JUnit-5-migration.md"
+  s_002e5ca712a28f::t_8b8352542b2c32 7
+  s_002e5ca712a28f::t_17907412813ef8 1-6,8-9,11-13,15-16
+  s_002e5ca712a28f::t_5d736575036583 10,14,17-18
+"backlog/decisions/decision-5 - JitPack-over-GitHub-Packages-as-primary-distribution.md"
+  s_002e5ca712a28f::t_17907412813ef8 1-6,8-9,11-13,15-16
+  s_002e5ca712a28f::t_8b8352542b2c32 7
+  s_002e5ca712a28f::t_d896820d98639c 10,14,17-18
+"backlog/tasks/task-4 - Fix-SASL-credential-exposure.md"
+  ai_agent 1-21
+"backlog/tasks/task-17 - Remove-JPMS-module-info.md"
+  s_002e5ca712a28f::t_133cdd71cc0ae2 1-20
+"backlog/tasks/task-6 - Fix-unbounded-literal-parsing.md"
+  s_002e5ca712a28f::t_2cb3e975ae3bbe 1-21
+"backlog/decisions/decision-6 - SLSA-Level-3-build-attestations.md"
+  s_002e5ca712a28f::t_17907412813ef8 1-6,8-9,11-13,15-16
+  s_002e5ca712a28f::t_4c7bdc93a441f0 10,14,17-18
+  s_002e5ca712a28f::t_8b8352542b2c32 7
+"backlog/tasks/task-15 - Implement-Claude-Code-harness-with-agents.md"
+  s_002e5ca712a28f::t_8624d8bdcb5fc3 1-20
+tmp/rules-backup/managesievej-classic-protection.json
+  ai_agent 1-14
+"backlog/tasks/task-2 - Add-integration-tests-with-mock-server.md"
+  s_002e5ca712a28f::t_81da33934fc245 1-20
+"backlog/tasks/task-9 - Create-NOTICE-file-for-third-party-attributions.md"
+  s_002e5ca712a28f::t_faf04a90358538 1-20
+"backlog/tasks/task-7 - Improve-test-coverage.md"
+  s_002e5ca712a28f::t_33f8f0a979e074 1-20
+"backlog/decisions/decision-3 - JPMS-removal.md"
+  s_002e5ca712a28f::t_17907412813ef8 1-6,8-9,11-13,15-16
+  s_002e5ca712a28f::t_8b8352542b2c32 7
+  s_002e5ca712a28f::t_27b870c06219d4 10,14,17-18
+"backlog/docs/guides/doc-1 - Release-Process.md"
+  s_002e5ca712a28f::t_be133ab333811f 1-5,7,10
+  s_002e5ca712a28f::t_bacfa763e9adb4 6,9,11,13-15,17-23,25-29
+  s_002e5ca712a28f::t_8b8352542b2c32 8,12,16,24
+"backlog/tasks/task-5 - Fix-SSL-TLS-certificate-handling.md"
+  s_002e5ca712a28f::t_596b422372b98c 1-21
+"backlog/decisions/decision-2 - Java-21-LTS-upgrade.md"
+  s_002e5ca712a28f::t_8b8352542b2c32 7
+  s_002e5ca712a28f::t_3acbdddb1cf95e 10,14,17-18
+  s_002e5ca712a28f::t_17907412813ef8 1-6,8-9,11-13,15-16
+"backlog/tasks/task-18 - Add-JitPack-distribution.md"
+  s_002e5ca712a28f::t_89d5440c5929e8 1-20
+"backlog/tasks/task-8 - Clean-up-merge-conflict-artifacts.md"
+  ai_agent 1-18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "c1370e763f2c3301e88e7b2a9c280abf3e4b2c74",
+  "prompts": {},
+  "sessions": {
+    "s_002e5ca712a28f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1ba3c2162ffe41qK4o85kLDIV2",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
