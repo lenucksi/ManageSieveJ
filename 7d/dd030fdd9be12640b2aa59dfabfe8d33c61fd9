@@ -1,0 +1,27 @@
+.github/workflows/release.yml
+  s_2695e508841223::t_3420d350d553d0 7,11
+  s_2695e508841223::t_4f912f0eb2d836 96
+  s_2695e508841223::t_2867654c6cdb32 4-5
+  s_2695e508841223::t_edb19d892b6cd9 1,8-10,20,82-88,194-195
+  s_2695e508841223::t_940fb72fc02508 113
+  s_2695e508841223::t_9fe1fe305abd08 199-201
+  s_2695e508841223::t_a5257a8b399f91 89,121,132,152,165,189
+.github/workflows/release-please.yml
+  s_2695e508841223::t_b4f316bde18170 1-33
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "7ddd030fdd9be12640b2aa59dfabfe8d33c61fd9",
+  "prompts": {},
+  "sessions": {
+    "s_2695e508841223": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1b919e1b1ffeh30eeTlXDCPejL",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
