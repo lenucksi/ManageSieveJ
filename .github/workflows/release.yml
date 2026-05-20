@@ -1,53 +1,25 @@
-name: Release
+name: Publish to Maven Central
 
 on:
-  push:
-    branches:
-      - master
+  release:
+    types: [published]
   workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to publish (e.g. managesievej-v0.4.0)'
+        required: true
+        type: string
 
 permissions:
   contents: write
-  pull-requests: write
-  issues: write
   id-token: write
   attestations: write
   packages: write
 
 jobs:
-  release-please:
-    name: Create Release
-    runs-on: ubuntu-latest
-    outputs:
-      release_created: ${{ steps.release.outputs.release_created }}
-      tag_name: ${{ steps.release.outputs.tag_name }}
-      version: ${{ steps.release.outputs.version }}
-      upload_url: ${{ steps.release.outputs.upload_url }}
-
-    steps:
-      - name: Harden Runner
-        uses: step-security/harden-runner@ab7a9404c0f3da075243ca237b5fac12c98deaa5 # v2.19.3
-        with:
-          egress-policy: audit
-
-      - name: Checkout code
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-
-      - name: Create Release
-        id: release
-        uses: googleapis/release-please-action@45996ed1f6d02564a971a2fa1b5860e934307cf7 # v5.0.0
-        with:
-          config-file: .github/release-please-config.json
-          manifest-file: .github/.release-please-manifest.json
-
-  build-and-publish:
+  publish:
     name: Build and Publish to Maven Central + GitHub Packages
     runs-on: ubuntu-latest
-    needs: release-please
-    if: needs.release-please.outputs.release_created == 'true'
 
     steps:
       - name: Harden Runner
@@ -107,14 +79,21 @@ jobs:
         with:
           subject-path: 'target/*.jar'
 
+      - name: Set release tag
+        run: |
+          if [ "${{ github.event_name }}" = "release" ]; then
+            echo "TAG_NAME=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
+          else
+            echo "TAG_NAME=${{ inputs.release_tag }}" >> $GITHUB_ENV
+          fi
+
       - name: Upload JAR to release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           for jar in target/*.jar; do
             [ -f "$jar" ] || continue
-            filename=$(basename "$jar")
-            gh release upload ${{ needs.release-please.outputs.tag_name }} \
+            gh release upload "${TAG_NAME}" \
               "$jar" \
               --clobber
           done
@@ -131,7 +110,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release upload ${{ needs.release-please.outputs.tag_name }} \
+          gh release upload "${TAG_NAME}" \
             target/checksums.txt \
             --clobber
 
@@ -139,6 +118,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          VERSION="${TAG_NAME#managesievej-}"
           cat << 'EOF' > usage.md
 
           ## Installation
@@ -149,7 +129,7 @@ jobs:
           <dependency>
               <groupId>io.github.lenucksi</groupId>
               <artifactId>managesievej</artifactId>
-              <version>${{ needs.release-please.outputs.version }}</version>
+              <version>${VERSION}</version>
           </dependency>
           ```
 
@@ -169,7 +149,7 @@ jobs:
               <dependency>
                   <groupId>com.github.lenucksi</groupId>
                   <artifactId>ManageSieveJ</artifactId>
-                  <version>${{ needs.release-please.outputs.tag_name }}</version>
+                  <version>${TAG_NAME}</version>
               </dependency>
           </dependencies>
           ```
@@ -182,7 +162,7 @@ jobs:
           <dependency>
               <groupId>io.github.lenucksi</groupId>
               <artifactId>managesievej</artifactId>
-              <version>${{ needs.release-please.outputs.version }}</version>
+              <version>${VERSION}</version>
           </dependency>
 
           <repositories>
@@ -206,17 +186,16 @@ jobs:
           Verify SLSA provenance:
 
           ```bash
-          gh attestation verify managesievej-${{ needs.release-please.outputs.version }}.jar \
+          gh attestation verify managesievej-${VERSION}.jar \
             --owner lenucksi
           ```
           EOF
 
-          gh release edit ${{ needs.release-please.outputs.tag_name }} \
-            --notes-file <(cat <(gh release view ${{ needs.release-please.outputs.tag_name }} --json body -q .body) usage.md)
+          gh release edit "${TAG_NAME}" \
+            --notes-file <(cat <(gh release view "${TAG_NAME}" --json body -q .body) usage.md)
 
       - name: Trigger JitPack build
         run: |
-          echo "Triggering JitPack build for release ${{ needs.release-please.outputs.tag_name }}..."
-          # Trigger build by requesting the artifact (30 second timeout to avoid waiting for full build)
-          curl -s -m 30 "https://jitpack.io/com/github/lenucksi/ManageSieveJ/${{ needs.release-please.outputs.tag_name }}/build.log" || true
-          echo "JitPack build triggered. Check status at: https://jitpack.io/com/github/lenucksi/ManageSieveJ/${{ needs.release-please.outputs.tag_name }}"
+          echo "Triggering JitPack build for release ${TAG_NAME}..."
+          curl -s -m 30 "https://jitpack.io/com/github/lenucksi/ManageSieveJ/${TAG_NAME}/build.log" || true
+          echo "JitPack build triggered. Check status at: https://jitpack.io/com/github/lenucksi/ManageSieveJ/${TAG_NAME}"
