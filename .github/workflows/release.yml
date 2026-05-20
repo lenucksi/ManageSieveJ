@@ -62,16 +62,14 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Import GPG key
-        run: |
-          echo "${{ secrets.GPG_PRIVATE_KEY }}" | gpg --batch --import
-          echo "CBDA2BCD7A159E9C:6:" | gpg --import-ownertrust
-          FINGERPRINT="CBDA2BCD7A159E9C"
-          KEYGRIP=$(gpg --with-keygrip --list-secret-keys "${FINGERPRINT}" | grep "Keygrip" | head -1 | awk '{print $3}')
-          if [ -n "${KEYGRIP}" ]; then
-            echo "${KEYGRIP}:0:${GPG_PASSPHRASE}" | gpg-preset-passphrase --preset 2>/dev/null || true
-          fi
         env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+        run: |
+          printf '%s\n' "${GPG_PRIVATE_KEY}" | gpg --batch --import
+          mkdir -p ~/.gnupg
+          printf '%s\n' "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
+          gpgconf --reload gpg-agent 2>/dev/null || true
 
       - name: Publish to Maven Central
         run: mvn -B deploy -DskipTests -P central -Dgpg.keyname=CBDA2BCD7A159E9C
