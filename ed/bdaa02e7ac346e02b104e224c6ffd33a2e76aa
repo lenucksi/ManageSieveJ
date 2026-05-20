@@ -1,0 +1,20 @@
+.github/renovate.json
+  s_002e5ca712a28f::t_c1e56bc9dddef0 16
+  s_002e5ca712a28f::t_a01c9bab190997 38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "edbdaa02e7ac346e02b104e224c6ffd33a2e76aa",
+  "prompts": {},
+  "sessions": {
+    "s_002e5ca712a28f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1ba3c2162ffe41qK4o85kLDIV2",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
