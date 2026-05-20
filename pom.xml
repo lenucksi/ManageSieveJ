@@ -236,7 +236,6 @@
                                 </goals>
                                 <configuration>
                                     <keyname>${gpg.keyname}</keyname>
-                                    <pinentryMode>loopback</pinentryMode>
                                 </configuration>
                             </execution>
                         </executions>

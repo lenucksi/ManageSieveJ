@@ -4,11 +4,6 @@ on:
   release:
     types: [published]
   workflow_dispatch:
-    inputs:
-      release_tag:
-        description: 'Release tag to publish (e.g. managesievej-v0.4.0)'
-        required: true
-        type: string
 
 permissions:
   contents: write
@@ -67,32 +62,31 @@ jobs:
           GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
         run: |
           printf '%s\n' "${GPG_PRIVATE_KEY}" | gpg --batch --import
+          # GPG-Agent konfigurieren
           mkdir -p ~/.gnupg
-          printf '%s\n' "allow-loopback-pinentry" >> ~/.gnupg/gpg-agent.conf
-          gpgconf --reload gpg-agent 2>/dev/null || true
+          chmod 700 ~/.gnupg
+          printf '%s\n' "allow-preset-passphrase" >> ~/.gnupg/gpg-agent.conf
+          gpgconf --reload gpg-agent
+          # Keygrip ermitteln und Passphrase preset-ten
+          KEYGRIP=$(gpg --with-keygrip --list-secret-keys 'CBDA2BCD7A159E9C' | grep 'Keygrip' | head -1 | awk '{print $3}')
+          if [ -n "${KEYGRIP}" ]; then
+            /usr/lib/gnupg2/gpg-preset-passphrase --preset "${KEYGRIP}" <<< "${GPG_PASSPHRASE}" 2>/dev/null || \
+            /usr/lib/gnupg/gpg-preset-passphrase --preset "${KEYGRIP}" <<< "${GPG_PASSPHRASE}" 2>/dev/null || true
+          fi
 
       - name: Publish to Maven Central
         run: mvn -B deploy -DskipTests -P central -Dgpg.keyname=CBDA2BCD7A159E9C
-        env:
-          GPG_TTY: $(tty)
-          MAVEN_OPTS: -Dgpg.passphrase=${{ secrets.GPG_PASSPHRASE }}
 
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@a2bbfa25375fe432b6a289bc6b6cd05ecd0c4c32 # v4.1.0
         with:
           subject-path: 'target/*.jar'
 
-      - name: Set release tag
-        run: |
-          if [ "${{ github.event_name }}" = "release" ]; then
-            echo "TAG_NAME=${{ github.event.release.tag_name }}" >> $GITHUB_ENV
-          else
-            echo "TAG_NAME=${{ inputs.release_tag }}" >> $GITHUB_ENV
-          fi
-
       - name: Upload JAR to release
+        if: github.event_name == 'release'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
           for jar in target/*.jar; do
             [ -f "$jar" ] || continue
@@ -110,14 +104,17 @@ jobs:
           done
 
       - name: Upload checksums to release
+        if: github.event_name == 'release'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TAG_NAME: ${{ github.event.release.tag_name }}
         run: |
           gh release upload "${TAG_NAME}" \
             target/checksums.txt \
             --clobber
 
       - name: Update release notes with usage instructions
+        if: github.event_name == 'release'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -198,6 +195,7 @@ jobs:
             --notes-file <(cat <(gh release view "${TAG_NAME}" --json body -q .body) usage.md)
 
       - name: Trigger JitPack build
+        if: github.event_name == 'release'
         run: |
           echo "Triggering JitPack build for release ${TAG_NAME}..."
           curl -s -m 30 "https://jitpack.io/com/github/lenucksi/ManageSieveJ/${TAG_NAME}/build.log" || true
