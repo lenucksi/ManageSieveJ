@@ -36,14 +36,14 @@ jobs:
       # ── SBOM Generation (parallel tracks) ──
 
       - name: Generate SBOM with Syft (source scan)
-        uses: anchore/sbom-action@d5d3c2be293e5c1805e36e4b5e7b2c6de0e15153 # v0.17.1
+        uses: anchore/sbom-action@ab9d16d4b419c9d1a02df5213fa0ebe965ca5a57 # v0.17.1
         with:
           path: ./
           format: cyclonedx-json
           output-file: sbom-syft.cdx.json
 
       - name: Generate SBOM with Syft (SPDX)
-        uses: anchore/sbom-action@d5d3c2be293e5c1805e36e4b5e7b2c6de0e15153 # v0.17.1
+        uses: anchore/sbom-action@ab9d16d4b419c9d1a02df5213fa0ebe965ca5a57 # v0.17.1
         with:
           path: ./
           format: spdx-json
@@ -65,7 +65,7 @@ jobs:
       # ── Vulnerability Scanning (parallel tracks) ──
 
       - name: Scan source with Trivy
-        uses: aquasecurity/trivy-action@97dca0210b06c0a65c2c56e96f77b71ab60be303 # v0.29.0
+        uses: aquasecurity/trivy-action@18f2510ee396bbf400402947b394f2dd8c87dbb0 # v0.29.0
         with:
           scan-type: fs
           scan-ref: .
@@ -75,13 +75,13 @@ jobs:
           exit-code: 0
 
       - name: Upload Trivy SARIF
-        uses: github/codeql-action/upload-sarif@fa0e9271cb1a181d6cfc14802f315a2ed76e9bb5 # v3.28.16
+        uses: github/codeql-action/upload-sarif@c29f4eedf1fb43be1c9b9611f2e861ca03ad0008 # v3.28.16
         with:
           sarif_file: trivy-results.sarif
           category: trivy
 
       - name: Scan SBOM with Grype
-        uses: anchore/scan-action@6ac0f0e07a2e8cf2b3f31911e77e76b6f26f771a # v7.0.0
+        uses: anchore/scan-action@f6601287cdb1efc985d6b765bbf99cb4c0ac29d8 # v7.0.0
         id: grype
         with:
           sbom: target/sbom-cyclonedx-maven.json
@@ -90,7 +90,7 @@ jobs:
           fail-build: false
 
       - name: Upload Grype SARIF
-        uses: github/codeql-action/upload-sarif@fa0e9271cb1a181d6cfc14802f315a2ed76e9bb5 # v3.28.16
+        uses: github/codeql-action/upload-sarif@c29f4eedf1fb43be1c9b9611f2e861ca03ad0008 # v3.28.16
         with:
           sarif_file: ${{ steps.grype.outputs.sarif }}
           category: grype
