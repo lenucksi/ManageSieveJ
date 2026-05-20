@@ -1,0 +1,14 @@
+{
+  "_description": "Classic branch protection for lenucksi/ManageSieveJ master — created 2026-05-18",
+  "_restore_url": "PUT /repos/lenucksi/ManageSieveJ/branches/master/protection",
+  "_restore_cmd": "gh api repos/lenucksi/ManageSieveJ/branches/master/protection --method PUT --input thisfile.json",
+  "required_status_checks": {
+    "strict": true,
+    "contexts": ["CI Summary"]
+  },
+  "enforce_admins": false,
+  "required_pull_request_reviews": null,
+  "restrictions": null,
+  "allow_force_pushes": false,
+  "allow_deletions": false
+}
