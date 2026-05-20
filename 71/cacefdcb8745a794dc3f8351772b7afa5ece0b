@@ -1,0 +1,20 @@
+.github/workflows/security-supply-chain.yml
+  s_002e5ca712a28f::t_47989b6524425c 60
+  s_002e5ca712a28f::t_0910ce3af7ccdc 68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "71cacefdcb8745a794dc3f8351772b7afa5ece0b",
+  "prompts": {},
+  "sessions": {
+    "s_002e5ca712a28f": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1ba3c2162ffe41qK4o85kLDIV2",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
