@@ -1,0 +1,21 @@
+pom.xml
+  s_2695e508841223::t_05cb55c7039e6d 261
+.github/workflows/release.yml
+  s_2695e508841223::t_f2b32413b363ea 66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.11",
+  "base_commit_sha": "80279cf625e0b23530d486268a1cb6ff0a999c7e",
+  "prompts": {},
+  "sessions": {
+    "s_2695e508841223": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_1b919e1b1ffeh30eeTlXDCPejL",
+        "model": "deepseek-v4-flash"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
