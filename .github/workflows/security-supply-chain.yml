@@ -133,6 +133,7 @@ jobs:
             target/sbom-cyclonedx-maven.json
             target/sbom-cdxgen.json
             trivy-results.sarif
+            grype-results.sarif
             NOTICE.generated
             grant-report.json
           retention-days: 90
