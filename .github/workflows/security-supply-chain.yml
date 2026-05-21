@@ -53,7 +53,16 @@ jobs:
         run: |
           mvn -B org.cyclonedx:cyclonedx-maven-plugin:2.9.1:makeBom \
             -Dcyclonedx.outputFormat=json \
-            -Dcyclonedx.outputName=sbom-cyclonedx-maven
+            -Dcyclonedx.outputName=sbom-cyclonedx-maven 2>/dev/null || true
+          # Fallback: check common output paths
+          if [ -f target/sbom-cyclonedx-maven.json ]; then
+            echo "Maven CycloneDX SBOM generated"
+          elif [ -f target/bom.json ]; then
+            cp target/bom.json target/sbom-cyclonedx-maven.json
+            echo "Using target/bom.json as CycloneDX SBOM"
+          else
+            echo "No Maven CycloneDX SBOM generated - will use Syft SBOM instead"
+          fi
 
       - name: Generate SBOM with cdxgen
         run: |
@@ -81,33 +90,36 @@ jobs:
           category: trivy
 
       - name: Scan SBOM with Grype
-        uses: anchore/scan-action@e1165082ffb1fe366ebaf02d8526e7c4989ea9d2 # v7.4.0
         id: grype
-        with:
-          sbom: target/sbom-cyclonedx-maven.json
-          severity-cutoff: medium
-          output-format: sarif
-          fail-build: false
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -d -b /usr/local/bin v0.110.0 2>&1
+          SBOM_FILE="sbom-syft.cdx.json"
+          [ -f "target/sbom-cyclonedx-maven.json" ] && SBOM_FILE="target/sbom-cyclonedx-maven.json"
+          grype sbom:"$SBOM_FILE" -o sarif --file grype-results.sarif --fail-on medium 2>&1 || true
 
       - name: Upload Grype SARIF
         uses: github/codeql-action/upload-sarif@9e0d7b8d25671d64c341c19c0152d693099fb5ba # v4.35.5
         with:
-          sarif_file: ${{ steps.grype.outputs.sarif }}
+          sarif_file: grype-results.sarif
           category: grype
 
       # ── Third-Party Notices ──
 
       - name: Generate NOTICE from sbom-to-notices
         run: |
+          SBOM_FILE="sbom-syft.cdx.json"
+          [ -f "target/sbom-cyclonedx-maven.json" ] && SBOM_FILE="target/sbom-cyclonedx-maven.json"
           pip install sbom-to-notices 2>/dev/null || pip3 install sbom-to-notices 2>/dev/null || true
-          if [ -f target/sbom-cyclonedx-maven.json ] && command -v sbom-to-notices 2>/dev/null; then
-            sbom-to-notices target/sbom-cyclonedx-maven.json > NOTICE.generated 2>/dev/null || true
+          if command -v sbom-to-notices 2>/dev/null; then
+            sbom-to-notices "$SBOM_FILE" > NOTICE.generated 2>/dev/null || true
           fi
 
       - name: Generate license report with Grant
         continue-on-error: true
         run: |
-          npx @anchore/grant check SBOM:target/sbom-cyclonedx-maven.json --output json > grant-report.json 2>/dev/null || true
+          SBOM_FILE="sbom-syft.cdx.json"
+          [ -f "target/sbom-cyclonedx-maven.json" ] && SBOM_FILE="target/sbom-cyclonedx-maven.json"
+          npx @anchore/grant check "SBOM:$SBOM_FILE" --output json > grant-report.json 2>/dev/null || true
 
       # ── Upload Artifacts ──
 
