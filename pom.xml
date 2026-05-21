@@ -258,6 +258,7 @@
                             <autoPublish>true</autoPublish>
                             <waitUntil>published</waitUntil>
                             <publishingServerId>central</publishingServerId>
+                            <deploymentName>managesievej-${project.version}</deploymentName>
                         </configuration>
                     </plugin>
                 </plugins>

@@ -63,7 +63,7 @@ jobs:
           printf '%s\n' "${GPG_PRIVATE_KEY}" | gpg --batch --import
 
       - name: Publish to Maven Central
-        run: mvn -B deploy -DskipTests -P central -Dgpg.keyname=CBDA2BCD7A159E9C
+        run: mvn -B deploy -DskipTests -P central -Dgpg.keyname=CBDA2BCD7A159E9C -X
         env:
           MAVEN_GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
 
