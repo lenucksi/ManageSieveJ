@@ -54,7 +54,7 @@ jobs:
           CENTRAL_TOKEN_PASS: ${{ secrets.CENTRAL_TOKEN_PASS }}
 
       - name: Publish to Maven Central
-        run: mvn -B deploy -DskipTests -P central -Dgpg.keyname=EB8AEC2BA4B6DC1F -X
+        run: mvn -B deploy -DskipTests -P central -Dgpg.keyname=EB8AEC2BA4B6DC1F
         env:
           CENTRAL_TOKEN_USER: ${{ secrets.CENTRAL_TOKEN_USER }}
           CENTRAL_TOKEN_PASS: ${{ secrets.CENTRAL_TOKEN_PASS }}
