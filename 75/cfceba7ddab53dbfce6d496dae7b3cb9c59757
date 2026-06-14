@@ -1,0 +1,42 @@
+.github/renovate.json
+  s_47acd3c1107f6c::t_1cff5768c45df8 5-6,10,35
+.github/workflows/security-supply-chain.yml
+  s_47acd3c1107f6c::t_7889a207052f41 77
+.github/workflows/codeql.yml
+  s_47acd3c1107f6c::t_139503dc231991 41
+pom.xml
+  s_47acd3c1107f6c::t_87d28a891293bf 253
+  s_47acd3c1107f6c::t_cad6e3824831a8 148
+  s_47acd3c1107f6c::t_4686de4fdd61bb 234
+.github/workflows/ci.yml
+  s_47acd3c1107f6c::t_53b4be0650e8a8 22,44,49,140
+  s_47acd3c1107f6c::t_57e84b9f4d32c3 75
+.github/workflows/dependency-review.yml
+  s_47acd3c1107f6c::t_1ec78d5d5de01a 23
+.github/workflows/release-please.yml
+  s_47acd3c1107f6c::t_81932f313f5a53 24
+.github/workflows/scorecard.yml
+  s_47acd3c1107f6c::t_13312ea3b87a98 39
+.github/workflows/actionlint.yml
+  s_47acd3c1107f6c::t_9fd533766b1101 24
+  s_47acd3c1107f6c::t_3333c4e8f54fe4 15
+.github/workflows/release.yml
+  s_47acd3c1107f6c::t_5546a7a14776c1 51
+  s_47acd3c1107f6c::t_1f85c059762ec4 21,26,30,36-40,53-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "75cfceba7ddab53dbfce6d496dae7b3cb9c59757",
+  "prompts": {},
+  "sessions": {
+    "s_47acd3c1107f6c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_13a1b4d46ffeEoU1j4cbXCrhR8",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
