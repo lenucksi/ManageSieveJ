@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.lenucksi</groupId>
     <artifactId>managesievej</artifactId>
-    <version>0.3.13</version>
+    <version>0.3.14-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>ManageSieveJ</name>
     <url>https://github.com/lenucksi/ManageSieveJ</url>
@@ -241,6 +241,7 @@
                                 </goals>
                                 <configuration>
                                     <keyname>${gpg.keyname}</keyname>
+                                    <passphrase>${env.GPG_PASSPHRASE}</passphrase>
                                 </configuration>
                             </execution>
                         </executions>
