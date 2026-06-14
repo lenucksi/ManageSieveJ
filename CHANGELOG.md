@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.3.14](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.13...managesievej-v0.3.14) (2026-06-14)
+
+
+### Bug Fixes
+
+* revert pom.xml version to 0.3.13 (release-please managed) ([7eca203](https://github.com/lenucksi/ManageSieveJ/commit/7eca203ef42897c4a4b4d9633fd5c085b55967db))
+* set next dev version to 0.3.14-SNAPSHOT, add GPG passphrase from env ([ea280d1](https://github.com/lenucksi/ManageSieveJ/commit/ea280d121dab4d623251d6142a72d9bd93b7aac8))
+
 ## [0.3.12](https://github.com/lenucksi/ManageSieveJ/compare/managesievej-v0.3.11...managesievej-v0.3.12) (2026-05-18)
 
 
