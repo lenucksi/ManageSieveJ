@@ -1,0 +1,20 @@
+pom.xml
+  s_47acd3c1107f6c::t_a8b127b5e96a78 244
+  s_47acd3c1107f6c::t_d5f2736818ad8e 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "ea280d121dab4d623251d6142a72d9bd93b7aac8",
+  "prompts": {},
+  "sessions": {
+    "s_47acd3c1107f6c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_13a1b4d46ffeEoU1j4cbXCrhR8",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
