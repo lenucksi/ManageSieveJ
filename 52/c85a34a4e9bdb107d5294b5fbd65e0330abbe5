@@ -1,0 +1,24 @@
+pom.xml
+  s_47acd3c1107f6c::t_b291f77c4ddac5 251
+  s_47acd3c1107f6c::t_d7d2e1ca7aaf8a 249-250,252-258
+.github/.release-please-manifest.json
+  s_47acd3c1107f6c::t_cad0ce2f36317e 1-3
+.github/workflows/release.yml
+  s_47acd3c1107f6c::t_7ca75322b3d759 49-50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "52c85a34a4e9bdb107d5294b5fbd65e0330abbe5",
+  "prompts": {},
+  "sessions": {
+    "s_47acd3c1107f6c": {
+      "agent_id": {
+        "tool": "opencode",
+        "id": "ses_13a1b4d46ffeEoU1j4cbXCrhR8",
+        "model": "deepseek-v4-flash-free"
+      },
+      "human_author": "Lenucksi <lenucksi@users.noreply.github.com>"
+    }
+  }
+}
