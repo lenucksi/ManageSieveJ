@@ -241,8 +241,18 @@
                                 </goals>
                                 <configuration>
                                     <keyname>${gpg.keyname}</keyname>
-                                    <pinentryMode>loopback</pinentryMode>
                                 </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>3.1.4</version>
+                        <executions>
+                            <execution>
+                                <id>default-deploy</id>
+                                <phase>none</phase>
                             </execution>
                         </executions>
                     </plugin>
